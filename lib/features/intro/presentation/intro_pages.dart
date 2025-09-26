@@ -7,7 +7,7 @@ final List<Map<String, dynamic>> introPages = [
     "subtitle": "استكشف مجموعة متنوعة من الأنشطة\nوالفعاليات في مدينتك",
   },
   {
-    "icon": Icons.location_on,
+    "icon": Icons.filter_list_alt,
     "title": "فلترة جديدة",
     "subtitle": "ابحث عن الانشطة التي تناسب اهتمامك و وقتك",
   },
