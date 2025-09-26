@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 abstract class Styles {
   static const textStyle18 = TextStyle(
@@ -11,12 +11,12 @@ abstract class Styles {
     fontSize: 20,
     fontWeight: FontWeight.normal,
   );
-  static final GoogleFonts30 = GoogleFonts.aclonica(
-    fontSize: 30,
-    fontWeight: FontWeight.w900,
+  // static final GoogleFonts30 = GoogleFonts.aclonica(
+  //   fontSize: 30,
+  //   fontWeight: FontWeight.w900,
 
-    letterSpacing: 1.2,
-  );
+  //   letterSpacing: 1.2,
+  // );
   static const textStyle30 = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w900,
