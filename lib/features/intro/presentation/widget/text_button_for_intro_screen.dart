@@ -22,9 +22,9 @@ class TextButtonForIntroScreen extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              context.go(AppRouter.signInScreen);
+              context.go(AppRouter.forgetPasswordScreen);
             },
-            child: const Text("تخطي"),
+            child: const Text("تخطي", style: TextStyle(color: Colors.white)),
           ),
           TextButton(
             onPressed: () {
@@ -34,11 +34,12 @@ class TextButtonForIntroScreen extends StatelessWidget {
                   curve: Curves.easeIn,
                 );
               } else {
-                context.go(AppRouter.signInScreen);
+                context.go(AppRouter.forgetPasswordScreen);
               }
             },
             child: Text(
               currentIndex == introPages.length - 1 ? "ابدأ" : "التالي",
+              style: TextStyle(color: Colors.white),
             ),
           ),
         ],

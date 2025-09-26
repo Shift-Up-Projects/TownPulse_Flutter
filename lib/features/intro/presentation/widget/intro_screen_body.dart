@@ -26,34 +26,17 @@ class IntroScreenBody extends StatelessWidget {
         ),
         SizedBox(height: 20),
 
-        Text(text1, style: Styles.textStyle30),
+        Text(text1, style: Styles.textStyle30.copyWith(color: Colors.white)),
         SizedBox(height: 20),
         Text(
           text2,
+
           maxLines: 2,
+
           textAlign: TextAlign.center,
-          style: Styles.textStyle18,
+          style: Styles.textStyle18.copyWith(color: Colors.white),
         ),
         Spacer(flex: 1),
-        // Padding(
-        //   padding: const EdgeInsets.all(20),
-        //   child: Row(
-        //     // spacing: 5,
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       TextButton(
-        //         style: ButtonStyle(),
-        //         onPressed: () {},
-        //         child: Text('تخطي', style: Styles.textStyle18),
-        //       ),
-        //       TextButton(
-        //         onPressed: () {},
-        //         child: Text('التالي', style: Styles.textStyle18),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        // Spacer(flex: 1),
       ],
     );
   }

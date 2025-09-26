@@ -12,8 +12,10 @@ class TownPulse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData.dark(),
-      themeMode: ThemeMode.light,
+      locale: Locale('ar'),
+
+      // theme: ThemeData.dark(),
+      // themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
     );
