@@ -14,7 +14,6 @@ abstract class Styles {
   static final GoogleFonts30 = GoogleFonts.aclonica(
     fontSize: 30,
     fontWeight: FontWeight.w900,
-
     letterSpacing: 1.2,
   );
   static const textStyle30 = TextStyle(
