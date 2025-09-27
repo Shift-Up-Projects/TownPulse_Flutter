@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:town_pulse2/core/utils/styles.dart';
+
 import 'package:town_pulse2/features/splash/presentation/widget/splash_view_body.dart';
 
 class SplashView extends StatefulWidget {
@@ -15,7 +14,16 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.blueGrey[900],
-      body: SplashViewBody(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF4C3D90), Color(0xFF8A5DAB)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SplashViewBody(),
+      ),
     );
   }
 }

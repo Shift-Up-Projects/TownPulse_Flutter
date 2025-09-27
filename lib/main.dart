@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:town_pulse2/features/splash/presentation/view/splash_view.dart';
+import 'package:town_pulse2/core/router/app_router.dart';
+// import 'package:town_pulse2/features/splash/presentation/view/splash_view.dart';
 
 void main() {
   runApp(TownPulse());
@@ -10,10 +11,13 @@ class TownPulse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      locale: Locale('ar'),
+
+      // theme: ThemeData.dark(),
+      // themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      home: SplashView(),
+      routerConfig: AppRouter.router,
     );
   }
 }
