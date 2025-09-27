@@ -11,12 +11,20 @@ abstract class Styles {
     fontSize: 20,
     fontWeight: FontWeight.normal,
   );
-  // static final GoogleFonts30 = GoogleFonts.aclonica(
-  //   fontSize: 30,
-  //   fontWeight: FontWeight.w900,
+// <<<<<<< momen
+//   static final GoogleFonts30 = GoogleFonts.aclonica(
+//     fontSize: 30,
+//     fontWeight: FontWeight.w900,
+//     letterSpacing: 1.2,
+//   );
+// =======
+//   // static final GoogleFonts30 = GoogleFonts.aclonica(
+//   //   fontSize: 30,
+//   //   fontWeight: FontWeight.w900,
 
-  //   letterSpacing: 1.2,
-  // );
+//   //   letterSpacing: 1.2,
+//   // );
+// >>>>>>> main
   static const textStyle30 = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w900,
