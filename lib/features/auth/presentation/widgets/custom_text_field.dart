@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -8,7 +9,7 @@ class CustomTextField extends StatelessWidget {
 
     required this.iconButton,
     this.obscureText = false,
-    this.color = Colors.black,
+    this.color = AppColors.textPrimary,
   });
   final String text;
 

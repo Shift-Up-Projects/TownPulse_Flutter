@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart';
 
 import 'package:town_pulse2/features/splash/presentation/widget/splash_view_body.dart';
 
@@ -17,7 +18,7 @@ class _SplashViewState extends State<SplashView> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF4C3D90), Color(0xFF8A5DAB)],
+            colors: [AppColors.bgPrimary, AppColors.bgSecondary],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

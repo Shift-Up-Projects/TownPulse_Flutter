@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.text, required this.onTap});
@@ -12,14 +13,12 @@ class CustomButton extends StatelessWidget {
         margin: EdgeInsets.all(30),
         height: 50,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.deepPurple),
+          // border: Border.all(color: Colors.deepPurple),
           borderRadius: BorderRadius.circular(15),
-          color: Colors.deepPurple,
+          color: AppColors.primaryDark,
         ),
         // color: Colors.white,
-        child: Center(
-          child: Text(text, style: TextStyle(color: Colors.white)),
-        ),
+        child: Center(child: Text(text)),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_button.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart';
@@ -11,7 +12,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -22,7 +23,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           SizedBox(height: 30),
           Text(
             'نسيت كلمة المرور ',
-            style: Styles.textStyle30.copyWith(color: Colors.deepPurple),
+            style: Styles.textStyle30.copyWith(color: AppColors.primary),
           ),
 
           Text(

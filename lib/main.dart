@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/app_theme.dart';
+import 'package:town_pulse2/features/auth/presentation/view/forget_password_screen.dart';
 import 'package:town_pulse2/features/home/presentation/views/home_screen.dart';
 // import 'package:town_pulse2/features/splash/presentation/
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:town_pulse2/features/intro/presentation/view/intro_screen.dart';
+import 'package:town_pulse2/features/splash/presentation/view/splash_view.dart';
 
 void main() {
   runApp(TownPulse());
@@ -14,7 +17,7 @@ class TownPulse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: AppThemes.darkTheme,
       debugShowCheckedModeBanner: false,
       locale: const Locale('ar', 'EG'),
@@ -24,12 +27,12 @@ class TownPulse extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: HomeScreen(),
+      // home: SplashView(),
 
       // theme: ThemeData.dark(),
       // themeMode: ThemeMode.light,
       // debugShowCheckedModeBanner: false,
-      // routerConfig: AppRouter.router,
+      routerConfig: AppRouter.router,
     );
   }
 }

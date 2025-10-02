@@ -16,14 +16,14 @@ class SplashViewBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Town',
+            'Pulse',
             style: Styles.textStyle30.copyWith(color: Colors.white),
           ).animate().slide(
             begin: Offset(-1, 0),
             end: Offset(0, 0),
             duration: 1.seconds,
           ),
-          Text('Pulse', style: Styles.textStyle30.copyWith(color: Colors.white))
+          Text('Town', style: Styles.textStyle30.copyWith(color: Colors.white))
               .animate()
               .slide(
                 begin: Offset(9, 0),
