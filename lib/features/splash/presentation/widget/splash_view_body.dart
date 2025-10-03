@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
-// import 'package:town_pulse2/features/intro/presentation/view/intro_screen.dart';
 
 class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});
@@ -15,14 +14,19 @@ class SplashViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+<<<<<<< Updated upstream
           Text(
             'Town',
             style: Styles.textStyle30.copyWith(color: Colors.white),
           ).animate().slide(
+=======
+          Text('Town', style: Styles.textStyle16).animate().slide(
+>>>>>>> Stashed changes
             begin: Offset(-1, 0),
             end: Offset(0, 0),
             duration: 1.seconds,
           ),
+<<<<<<< Updated upstream
           Text('Pulse', style: Styles.textStyle30.copyWith(color: Colors.white))
               .animate()
               .slide(
@@ -36,6 +40,13 @@ class SplashViewBody extends StatelessWidget {
                   context.go(AppRouter.introScreen);
                 },
               ),
+=======
+          Text('Pulse', style: Styles.textStyle16).animate().slide(
+            begin: Offset(9, 0),
+            end: Offset(0, 0),
+            duration: 1.seconds,
+          ),
+>>>>>>> Stashed changes
         ],
       ),
     );
