@@ -1,5 +1,6 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/features/intro/presentation/intro_pages.dart';
 import 'package:town_pulse2/features/intro/presentation/widget/intro_screen_body.dart';
@@ -23,37 +24,40 @@ class _IntroScreenState extends State<IntroScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF4C3D90), Color(0xFF8A5DAB)],
+            colors: [AppColors.bgSecondary, AppColors.bgPrimary],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: introPages.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return IntroScreenBody(
-                    icon: introPages[index]["icon"],
-                    text1: introPages[index]["title"],
-                    text2: introPages[index]["subtitle"],
-                  );
-                },
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: introPages.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    return IntroScreenBody(
+                      icon: introPages[index]["icon"],
+                      text1: introPages[index]["title"],
+                      text2: introPages[index]["subtitle"],
+                    );
+                  },
+                ),
               ),
-            ),
-            PointerForIntroScreen(currentIndex: currentIndex),
-            TextButtonForIntroScreen(
-              currentIndex: currentIndex,
-              pageController: _pageController,
-            ),
-          ],
+              PointerForIntroScreen(currentIndex: currentIndex),
+              TextButtonForIntroScreen(
+                currentIndex: currentIndex,
+                pageController: _pageController,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:town_pulse2/core/helper/CachHepler.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
-// import 'package:town_pulse2/features/splash/presentation/view/splash_view.dart';
+import 'package:town_pulse2/core/utils/api_services.dart';
+import 'package:town_pulse2/core/utils/app_theme.dart';
+import 'package:town_pulse2/features/auth/presentation/view/forget_password_screen.dart';
+import 'package:town_pulse2/features/home/presentation/views/home_screen.dart';
+// import 'package:town_pulse2/features/splash/presentation/
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:town_pulse2/features/intro/presentation/view/intro_screen.dart';
+import 'package:town_pulse2/features/splash/presentation/view/splash_view.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+  Api.init();
   runApp(TownPulse());
 }
 
@@ -12,11 +23,20 @@ class TownPulse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      locale: Locale('ar'),
+      theme: AppThemes.darkTheme,
+      debugShowCheckedModeBanner: false,
+      locale: const Locale('ar', 'EG'),
+      supportedLocales: const [Locale('ar', 'EG'), Locale('en', 'US')],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      // home: SplashView(),
 
       // theme: ThemeData.dark(),
       // themeMode: ThemeMode.light,
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
     );
   }

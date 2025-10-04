@@ -14,20 +14,9 @@ class SplashViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-<<<<<<< Updated upstream
-          Text(
-            'Town',
-            style: Styles.textStyle30.copyWith(color: Colors.white),
-          ).animate().slide(
-=======
-          Text('Town', style: Styles.textStyle16).animate().slide(
->>>>>>> Stashed changes
-            begin: Offset(-1, 0),
-            end: Offset(0, 0),
-            duration: 1.seconds,
-          ),
-<<<<<<< Updated upstream
-          Text('Pulse', style: Styles.textStyle30.copyWith(color: Colors.white))
+
+
+          Text('Town', style: Styles.textStyle30.copyWith(color: Colors.white))
               .animate()
               .slide(
                 begin: Offset(9, 0),
@@ -40,13 +29,11 @@ class SplashViewBody extends StatelessWidget {
                   context.go(AppRouter.introScreen);
                 },
               ),
-=======
           Text('Pulse', style: Styles.textStyle16).animate().slide(
             begin: Offset(9, 0),
             end: Offset(0, 0),
             duration: 1.seconds,
           ),
->>>>>>> Stashed changes
         ],
       ),
     );
