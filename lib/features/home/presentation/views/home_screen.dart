@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/features/home/presentation/widgets/app_bar_widget.dart';
 import 'package:town_pulse2/features/home/presentation/widgets/bottom_navigation_bar.dart';
-import 'package:town_pulse2/features/home/presentation/widgets/home_screens.dart';
+import 'package:town_pulse2/features/home/presentation/home_screens.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

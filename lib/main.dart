@@ -17,7 +17,7 @@ class TownPulse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       theme: AppThemes.darkTheme,
       debugShowCheckedModeBanner: false,
       locale: const Locale('ar', 'EG'),
@@ -27,12 +27,12 @@ class TownPulse extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      // home: SplashView(),
+      home: HomeScreen(),
 
       // theme: ThemeData.dark(),
       // themeMode: ThemeMode.light,
       // debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+      // routerConfig: AppRouter.router,
     );
   }
 }
