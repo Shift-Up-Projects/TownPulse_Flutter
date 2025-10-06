@@ -3,18 +3,19 @@ import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
-import 'package:town_pulse2/features/auth/presentation/view/widgets/custom_button.dart';
-import 'package:town_pulse2/features/auth/presentation/view/widgets/custom_text_field.dart' show CustomTextField;
+import 'package:town_pulse2/features/auth/presentation/widgets/custom_button.dart';
+import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart'
+    show CustomTextField;
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+class ForgetPasswordView extends StatefulWidget {
+  const ForgetPasswordView({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  TextEditingController emailController=TextEditingController();
+class _ForgetPasswordViewState extends State<ForgetPasswordView> {
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             controller: emailController,
             text: 'البريد الالكتروني',
             prefixIcon: Icons.email_outlined,
-
           ),
           CustomButton(text: 'ارسال رابط الاعادة', onTap: () {}),
           TextButton(

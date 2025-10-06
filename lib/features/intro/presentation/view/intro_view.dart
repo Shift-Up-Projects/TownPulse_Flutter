@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/features/intro/presentation/intro_pages.dart';
-import 'package:town_pulse2/features/intro/presentation/widget/intro_screen_body.dart';
+import 'package:town_pulse2/features/intro/presentation/widget/intro_view_body.dart';
 import 'package:town_pulse2/features/intro/presentation/widget/pointer_for_intro_screen.dart';
 import 'package:town_pulse2/features/intro/presentation/widget/text_button_for_intro_screen.dart';
 
-class IntroScreen extends StatefulWidget {
-  const IntroScreen({super.key});
+class IntroView extends StatefulWidget {
+  const IntroView({super.key});
 
   @override
-  State<IntroScreen> createState() => _IntroScreenState();
+  State<IntroView> createState() => _IntroViewState();
 }
 
-class _IntroScreenState extends State<IntroScreen> {
+class _IntroViewState extends State<IntroView> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
   @override

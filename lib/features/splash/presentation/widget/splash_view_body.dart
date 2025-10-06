@@ -14,14 +14,12 @@ class SplashViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
-
-          Text('Town', style: Styles.textStyle30.copyWith(color: Colors.white))
+          Text('Pulse', style: Styles.textStyle30.copyWith(color: Colors.white))
               .animate()
               .slide(
                 begin: Offset(9, 0),
                 end: Offset(0, 0),
-                duration: 1.seconds,
+                duration: 1.5.seconds,
               )
               .then()
               .callback(
@@ -29,8 +27,8 @@ class SplashViewBody extends StatelessWidget {
                   context.go(AppRouter.introScreen);
                 },
               ),
-          Text('Pulse', style: Styles.textStyle16).animate().slide(
-            begin: Offset(9, 0),
+          Text('Town', style: Styles.textStyle30).animate().slide(
+            begin: Offset(-9, 0),
             end: Offset(0, 0),
             duration: 1.seconds,
           ),
