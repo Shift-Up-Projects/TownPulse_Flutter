@@ -4,11 +4,18 @@ import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_button.dart';
-import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart'
+    show CustomTextField;
 
-class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({super.key});
+class ForgetPasswordView extends StatefulWidget {
+  const ForgetPasswordView({super.key});
 
+  @override
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
+}
+
+class _ForgetPasswordViewState extends State<ForgetPasswordView> {
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,11 +41,9 @@ class ForgetPasswordScreen extends StatelessWidget {
           SizedBox(height: 30),
 
           CustomTextField(
+            controller: emailController,
             text: 'البريد الالكتروني',
-            iconButton: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.email_outlined),
-            ),
+            prefixIcon: Icons.email_outlined,
           ),
           CustomButton(text: 'ارسال رابط الاعادة', onTap: () {}),
           TextButton(

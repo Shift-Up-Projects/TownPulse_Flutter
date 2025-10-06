@@ -6,56 +6,60 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.text,
+    this.textInputType,
+     this.suffixIconButton,
 
-    required this.iconButton,
     this.obscureText = false,
-    this.color = AppColors.textPrimary,
+    this.color = AppColors.textPrimary, required this.prefixIcon,
+    required this.controller
   });
   final String text;
-
-  final IconButton iconButton;
+  final TextEditingController controller;
+  final TextInputType? textInputType;
+  final IconButton? suffixIconButton;
+  final IconData prefixIcon;
   final Color color;
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              text,
-              style: Styles.textStyle14.copyWith(fontWeight: FontWeight.bold),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            text,
+            style: Styles.textStyle14.copyWith(fontWeight: FontWeight.bold),
           ),
-          TextFormField(
-            obscureText: obscureText,
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.right,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'هذا الحقل مطلوب';
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-              suffixIcon: iconButton,
-              // labelText: text,
-              floatingLabelStyle: TextStyle(color: color),
-              labelStyle: TextStyle(color: color),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: color),
-                borderRadius: BorderRadius.circular(12),
-                gapPadding: 12,
-              ),
-              hintText: text,
-              hintStyle: TextStyle(color: color),
+        ),
+        TextFormField(
+          controller: controller,
+          obscureText: obscureText,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.right,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'هذا الحقل مطلوب';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+
+            prefixIcon: Icon(prefixIcon),
+            suffixIcon: suffixIconButton,
+            // labelText: text,
+            floatingLabelStyle: TextStyle(color: color),
+            labelStyle: TextStyle(color: color),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: color),
+              borderRadius: BorderRadius.circular(12),
+              gapPadding: 12,
             ),
+            hintText: text,
+            hintStyle: TextStyle(color: color),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
