@@ -53,9 +53,38 @@ class AuthRepoImpl implements AuthRepo {
 
 
 @override
-Future<Either<Failure, String>> userSignUp() {
-  // TODO: implement userSignUp
-  throw UnimplementedError();
+Future<Either<Failure, String>> userSignUp({required String email, required String password,required String userName}
+    ) async {
+  try {
+    final cleanedEmail = email.trim();
+    final cleanName = userName.trim();
+    final cleanedPassword = password.trim();
+    final body = {
+      'name': cleanName,
+      'email': cleanedEmail,
+      'password': cleanedPassword
+    };
+    log('Sending Register request with: $body');
+    final response = await Api.instance.post(
+      url: 'users/signup',
+      body: body,
+    );
+    if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      String token = response.data['data']['token'];
+      log('Login response: ${response.data}');
+      log(token);
+      CacheHelper.saveData(key: 'isLogin', value: token);
+      return Right('user Register Successfully');
+    } else {
+      return Left(ServerFailure.fromResponse(
+          response.statusCode ?? 500,
+          response.data
+      ));
+    }
+  } on DioException catch (e) {
+    return Left(ServerFailure.fromDioException(e));
+  } catch (e) {
+    return Left(ServerFailure(e.toString()));
+  }
 }
-
 }

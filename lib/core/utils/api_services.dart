@@ -2,26 +2,19 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class Api {
-  // 1. المتغير الخاص الذي سيحمل نسخة Dio
   final Dio _dio;
 
-  // 2. Constructor خاص لمنع إنشاء نسخ جديدة من الخارج
   Api._(this._dio);
 
-  // 3. متغير Singleton ثابت ليحمل النسخة الوحيدة من الكلاس
   static Api? _instance;
 
-  // 4. دالة التهيئة المركزية (يجب استدعاؤها في main.dart)
   static void init() {
-    // تأكد من عدم تهيئة الكلاس أكثر من مرة
     if (_instance == null) {
       final dio = Dio(
         BaseOptions(
           baseUrl: 'https://townpulse-backend-fehi.onrender.com/api/v1.0.0/',
           receiveDataWhenStatusError: true,
-          // تعطيل المتابعة التلقائية لنعالجها يدويًا
           followRedirects: false,
-          // قبول أي status code حتى نتمكن من فحصه يدويًا
           validateStatus: (status ) => status != null,
           headers: {
             'Accept': 'application/json',
@@ -29,7 +22,6 @@ class Api {
           },
         ),
       );
-      // إنشاء النسخة الوحيدة من الكلاس
       _instance = Api._(dio);
       log("✅ Api Provider has been initialized successfully.");
     }
@@ -43,12 +35,11 @@ class Api {
     return _instance!;
   }
 
-  // --- دالة POST المحدثة بالكامل ---
   Future<Response> post({
     required String url,
     required dynamic body,
     String? token,
-    int retryCount = 1, // عدد محاولات إعادة الطلب
+    int retryCount = 1,
   }) async {
     try {
       log('➡️ POST Request to: $url');
@@ -87,7 +78,6 @@ class Api {
     }
   }
 
-  // --- دالة GET (مثال للتوافق مع النمط الجديد) ---
   Future<Response> get({required String url, String? token}) async {
     try {
       log('➡️ GET Request to: $url');
@@ -112,5 +102,4 @@ class Api {
     }
   }
 
-// يمكنك إضافة دوال PUT و DELETE بنفس الطريقة إذا احتجت إليها
 }
