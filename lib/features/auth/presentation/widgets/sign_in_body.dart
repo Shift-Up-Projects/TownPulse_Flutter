@@ -111,6 +111,7 @@ class _SignInBodyState extends State<SignInBody> {
                             userName: emailController.text,
                             password: passwordController.text,
                           );
+                          context.go(AppRouter.homeScreen);
                         } else {
                           autovalidateMode = AutovalidateMode.always;
                         }

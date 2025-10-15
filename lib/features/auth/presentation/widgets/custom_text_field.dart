@@ -7,11 +7,12 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.text,
     this.textInputType,
-     this.suffixIconButton,
+    this.suffixIconButton,
 
     this.obscureText = false,
-    this.color = AppColors.textPrimary, required this.prefixIcon,
-    required this.controller
+    this.color = AppColors.textPrimary,
+    required this.prefixIcon,
+    required this.controller,
   });
   final String text;
   final TextEditingController controller;
@@ -44,7 +45,6 @@ class CustomTextField extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
-
             prefixIcon: Icon(prefixIcon),
             suffixIcon: suffixIconButton,
             // labelText: text,
