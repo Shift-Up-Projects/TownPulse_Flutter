@@ -8,15 +8,23 @@ part 'user_login_state.dart';
 class UserLoginCubit extends Cubit<UserLoginState> {
   UserLoginCubit(this.authRepo) : super(UserLoginInitial());
   final AuthRepo authRepo;
-  static UserLoginCubit get(context)=>BlocProvider.of(context);
-  Future<void> userLogin({required String userName , required String password})async{
+  static UserLoginCubit get(context) => BlocProvider.of(context);
+  Future<void> userLogin({
+    required String userName,
+    required String password,
+  }) async {
     emit(UserLoginLoadingState());
-    final result=await authRepo.userSignIn(email: userName, password: password);
-    result.fold(ifLeft: (failure){
-      emit(UserLoginFailureState(errorMessage: failure.errorMessage));
-    }, ifRight: (message){
-      emit(UserLoginSuccessfullyState(message: message));
-    });
+    final result = await authRepo.userSignIn(
+      email: userName,
+      password: password,
+    );
+    result.fold(
+      ifLeft: (failure) {
+        emit(UserLoginFailureState(errorMessage: failure.errorMessage));
+      },
+      ifRight: (message) {
+        emit(UserLoginSuccessfullyState(message: message));
+      },
+    );
   }
-
 }
