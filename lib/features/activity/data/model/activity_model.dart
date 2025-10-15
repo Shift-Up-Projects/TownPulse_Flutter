@@ -1,5 +1,4 @@
 import 'package:town_pulse2/features/activity/data/model/activities/price.dart';
-import 'package:town_pulse2/features/activity/data/model/creator_model.dart';
 
 class Activity {
   String? id;
@@ -55,9 +54,7 @@ class Activity {
       category: json['category'] as String?,
       price: json['price'] == null
           ? null
-          : Price.fromId68e0f97bde0777bc871f1d5dTitleDescriptionLocationMapUrlHttpsMapsAppGooGlBNvCiYacPxk84MyH8Latitude247136Longitude466753StartDate20251201T180000000ZEndDate20251201T230000000ZStatusUpcomingCategoryMusicPriceNumberDecimal1505Capacity500Creator68d023537fc7b161f0f399fdCreatedAt20251004T103955015Z(
-              json['price'] as Map<String, dynamic>,
-            ),
+          : Price.json(json['price'] as Map<String, dynamic>),
       capacity: json['capacity'] as int?,
       creator: json['creator'] as String?,
       createdAt: json['created_at'] == null
@@ -66,8 +63,7 @@ class Activity {
     );
   }
 
-  Map<String, dynamic>
-  toId68e0f97bde0777bc871f1d5dTitleDescriptionLocationMapUrlHttpsMapsAppGooGlBNvCiYacPxk84MyH8Latitude247136Longitude466753StartDate20251201T180000000ZEndDate20251201T230000000ZStatusUpcomingCategoryMusicPriceNumberDecimal1505Capacity500Creator68d023537fc7b161f0f399fdCreatedAt20251004T103955015Z() {
+  Map<String, dynamic> json() {
     return {
       '_id': id,
       'title': title,
@@ -80,8 +76,7 @@ class Activity {
       'end_date': endDate?.toIso8601String(),
       'status': status,
       'category': category,
-      'price': price
-          ?.toId68e0f97bde0777bc871f1d5dTitleDescriptionLocationMapUrlHttpsMapsAppGooGlBNvCiYacPxk84MyH8Latitude247136Longitude466753StartDate20251201T180000000ZEndDate20251201T230000000ZStatusUpcomingCategoryMusicPriceNumberDecimal1505Capacity500Creator68d023537fc7b161f0f399fdCreatedAt20251004T103955015Z(),
+      'price': price?.toId(),
       'capacity': capacity,
       'creator': creator,
       'created_at': createdAt?.toIso8601String(),
