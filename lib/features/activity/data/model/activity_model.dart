@@ -1,4 +1,4 @@
-import 'package:town_pulse2/features/activity/data/model/activities/price.dart';
+import 'package:town_pulse2/features/activity/data/model/price.dart';
 
 class Activity {
   String? id;
@@ -54,7 +54,7 @@ class Activity {
       category: json['category'] as String?,
       price: json['price'] == null
           ? null
-          : Price.json(json['price'] as Map<String, dynamic>),
+          : Price.fromJson(json['price'] as Map<String, dynamic>),
       capacity: json['capacity'] as int?,
       creator: json['creator'] as String?,
       createdAt: json['created_at'] == null
@@ -76,7 +76,7 @@ class Activity {
       'end_date': endDate?.toIso8601String(),
       'status': status,
       'category': category,
-      'price': price?.toId(),
+      'price': price?.toJson(),
       'capacity': capacity,
       'creator': creator,
       'created_at': createdAt?.toIso8601String(),
