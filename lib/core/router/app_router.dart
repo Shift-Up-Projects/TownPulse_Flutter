@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:town_pulse2/features/activity/presentation/views/details_dialog_activities.dart';
 import 'package:town_pulse2/features/auth/presentation/view/forget_password_view.dart';
 import 'package:town_pulse2/features/auth/presentation/view/sign_in_view.dart';
 import 'package:town_pulse2/features/auth/presentation/view/sign_up_view.dart';
@@ -20,6 +21,7 @@ class AppRouter {
       GoRoute(path: signUpScreen, builder: (context, state) => SignUpView()),
       GoRoute(path: introScreen, builder: (context, state) => IntroView()),
       GoRoute(path: signInScreen, builder: (context, state) => SignInView()),
+
       GoRoute(
         path: forgetPasswordScreen,
         builder: (context, state) => ForgetPasswordView(),

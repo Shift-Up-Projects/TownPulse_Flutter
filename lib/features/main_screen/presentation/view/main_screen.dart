@@ -62,37 +62,11 @@ class MainScreen extends StatelessWidget {
                     itemCount: activities.length,
                     itemBuilder: (context, index) {
                       final activity = activities[index];
-                      return CardOfActivity(
-                        dateTime:
-                            activity.startDate!.minute.toString() +
-                            ' : ' +
-                            activity.startDate!.hour.toString(),
-                        date:
-                            activity.startDate!.day.toString() +
-                            ' - ' +
-                            activity.startDate!.month.toString() +
-                            ' - ' +
-                            activity.startDate!.year.toString(),
-                        image: 'assets/test.webp',
-                        location: activity.location.toString(),
-                        title: activity.title.toString(),
-                        category: activity.category.toString(),
-                      );
+                      return CardOfActivity(activity: activity);
                     },
                   );
                 }
-                // return ListView.builder(
 
-                //   shrinkWrap: true,
-                //   itemBuilder: (context, index) => CardOfActivity(
-
-                //     dateTime: DateTime.now().toString(),
-                //     date: '8 : 00',
-                //     image: 'assets/test.webp',
-                //     location: 'الرياض',
-                //     title: 'معرض الفن المعاصر', category: '',
-                //   ),
-                // );
                 return SizedBox.shrink();
               },
             ),
