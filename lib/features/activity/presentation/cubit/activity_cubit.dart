@@ -4,12 +4,15 @@ import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.
 
 class ActivityCubit extends Cubit<ActivityState> {
   final ActivityRepo activityRepo;
-  ActivityCubit(this.activityRepo) : super(ActivityIntial());
+  String? token;
+  String? currentCategory;
+  ActivityCubit(this.activityRepo, this.token) : super(ActivityIntial());
 
-  Future<void> fetchAllActivity() async {
+  Future<void> fetchAllActivity({String? category}) async {
     emit(ActivityLoading());
     try {
-      final activities = await activityRepo.getAllActivity();
+      currentCategory = category;
+      final activities = await activityRepo.getAllActivity(token, category);
       emit(ActivityLoaded(activities));
     } catch (e) {
       emit(ActivityError(e.toString()));
