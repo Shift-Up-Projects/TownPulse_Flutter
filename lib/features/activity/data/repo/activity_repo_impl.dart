@@ -9,4 +9,15 @@ class ActivityRepoImpl implements ActivityRepo {
   Future<List<Activity>> getAllActivity(String? token, String? category) async {
     return await remoteDataSource.getAllActivity(token, category);
   }
+
+  @override
+  Future<Activity> createActivity({
+    required String token,
+    required Map<String, dynamic> activityData,
+  }) {
+    return remoteDataSource.createActivity(
+      token: token,
+      activityData: activityData,
+    );
+  }
 }

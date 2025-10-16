@@ -15,3 +15,13 @@ class ActivityError extends ActivityState {
   final String message;
   ActivityError(this.message);
 }
+
+class ActivityCreating extends ActivityState {}
+
+class ActivityCreated extends ActivityState {
+  final Activity activity;
+  ActivityCreated(this.activity);
+
+  @override
+  List<Object?> get props => [activity];
+}

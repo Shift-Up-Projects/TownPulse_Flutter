@@ -66,7 +66,11 @@ class Api {
     }
   }
 
-  Future<Response> post({required String url, required dynamic body}) async {
+  Future<Response> post({
+    required String url,
+    required dynamic body,
+    String? token,
+  }) async {
     try {
       log('➡️ POST Request to: $url');
       log('   Body: $body');

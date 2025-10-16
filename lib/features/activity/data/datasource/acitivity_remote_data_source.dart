@@ -30,4 +30,21 @@ class AcitivityRemoteDataSource {
       throw Exception('فشل في جلب الأنشطة: $e');
     }
   }
+
+  Future<Activity> createActivity({
+    required String token,
+    required Map<String, dynamic> activityData,
+  }) async {
+    try {
+      final Response response = await _api.post(
+        url: 'activity',
+        token: token,
+        body: activityData,
+      );
+      final data = response.data['data'];
+      return Activity.fromJson(data);
+    } on Exception catch (e) {
+      throw Exception('فشل في إنشاء النشاط: $e');
+    }
+  }
 }
