@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:dart_either/dart_either.dart';
 import 'package:dio/dio.dart';
 import 'package:town_pulse2/core/errors/failure.dart';
+import 'package:town_pulse2/core/helper/CachHepler.dart';
 import 'package:town_pulse2/core/utils/api_services.dart';
 import 'package:town_pulse2/features/auth/data/repo/auth_repo.dart';
 
@@ -20,6 +21,7 @@ class AuthRepoImpl implements AuthRepo {
 
         // 🟢 حفظ التوكن في Api Singleton
         Api.instance.setToken(token);
+        await CacheHelper.saveData(key: 'token', value: token);
 
         log('Login Success. Token: $token');
 
