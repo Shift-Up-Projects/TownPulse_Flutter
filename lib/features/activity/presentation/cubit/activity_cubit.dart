@@ -18,4 +18,23 @@ class ActivityCubit extends Cubit<ActivityState> {
       emit(ActivityError(e.toString()));
     }
   }
+
+  Future<void> createActivity(Map<String, dynamic> activityData) async {
+    emit(ActivityCreating());
+    try {
+      if (token == null) {
+        emit(ActivityError("User not authenticated"));
+        return;
+      }
+      final newActivity = await activityRepo.createActivity(
+        token: token!,
+        activityData: activityData,
+      );
+      emit(ActivityCreated(newActivity));
+      // Optionally, refresh the activity list after creation
+      await fetchAllActivity(category: currentCategory);
+    } catch (e) {
+      emit(ActivityError(e.toString()));
+    }
+  }
 }

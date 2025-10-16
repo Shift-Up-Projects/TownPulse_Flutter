@@ -5,9 +5,9 @@ import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
-import 'package:town_pulse2/features/main_screen/presentation/widgets/card_horizontal_list_of_main_screen.dart';
-import 'package:town_pulse2/features/main_screen/presentation/widgets/card_of_activities.dart';
-import 'package:town_pulse2/features/main_screen/presentation/widgets/horizontal_list_of_main_screen.dart';
+import 'package:town_pulse2/features/activity/presentation/widgets/card_horizontal_list_of_main_screen.dart';
+import 'package:town_pulse2/features/activity/presentation/widgets/card_of_activities.dart';
+import 'package:town_pulse2/features/activity/presentation/widgets/horizontal_list_of_main_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -66,7 +66,10 @@ class MainScreen extends StatelessWidget {
                     itemCount: activities.length,
                     itemBuilder: (context, index) {
                       final activity = activities[index];
-                      return CardOfActivity(activity: activity);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: CardOfActivity(activity: activity),
+                      );
                     },
                   );
                 }

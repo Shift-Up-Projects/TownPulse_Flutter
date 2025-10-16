@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
+import 'package:town_pulse2/features/activity/data/category_consts.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 

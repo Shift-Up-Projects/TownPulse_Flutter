@@ -6,7 +6,7 @@ class CardHorizontalListOfMainScreen extends StatelessWidget {
     super.key,
     required this.text,
     required this.icon,
-    this.isSelected = false,
+    this.isSelected = true,
   });
   final String text;
   final IconData icon;
@@ -27,11 +27,9 @@ class CardHorizontalListOfMainScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(
               color: isSelected ? Theme.of(context).primaryColor : Colors.black,
-
               width: 1.5,
             ),
           ),
-
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(
