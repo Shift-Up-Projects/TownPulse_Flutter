@@ -6,7 +6,7 @@ class ActivityRepoImpl implements ActivityRepo {
   final AcitivityRemoteDataSource remoteDataSource;
   ActivityRepoImpl(this.remoteDataSource);
   @override
-  Future<List<Activity>> getAllActivity() async {
-    return await remoteDataSource.getAllActivity();
+  Future<List<Activity>> getAllActivity(String? token, String? category) async {
+    return await remoteDataSource.getAllActivity(token, category);
   }
 }

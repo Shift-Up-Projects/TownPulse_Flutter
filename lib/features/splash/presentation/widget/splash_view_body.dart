@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
+import 'package:town_pulse2/features/intro/presentation/view/intro_view.dart';
 
 class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});
@@ -25,6 +26,7 @@ class SplashViewBody extends StatelessWidget {
               .callback(
                 callback: (value) {
                   context.go(AppRouter.introScreen);
+                  // MaterialPageRoute(builder: (context) => const IntroView());
                 },
               ),
           Text('Town', style: Styles.textStyle30).animate().slide(

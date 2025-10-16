@@ -20,6 +20,10 @@ void main() async {
   await CacheHelper.init();
   Api.init();
   runApp(TownPulse());
+  final savedToken = CacheHelper.getData(key: 'token');
+  if (savedToken != null) {
+    Api.instance.setToken(savedToken);
+  }
 }
 
 class TownPulse extends StatelessWidget {
@@ -28,9 +32,11 @@ class TownPulse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ActivityCubit(ActivityRepoImpl(AcitivityRemoteDataSource()))
-            ..fetchAllActivity(),
+      create: (context) => ActivityCubit(
+        ActivityRepoImpl(AcitivityRemoteDataSource()),
+        // TODO: Replace 'yourSecondArgument' with the actual required argument
+        CacheHelper.getData(key: 'token'),
+      )..fetchAllActivity(category: null),
       child: MaterialApp.router(
         theme: AppThemes.darkTheme,
         debugShowCheckedModeBanner: false,
@@ -41,7 +47,7 @@ class TownPulse extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        // home: HomeView(),
+        // home: SplashView(),
 
         // theme: ThemeData.dark(),
         // themeMode: ThemeMode.light,

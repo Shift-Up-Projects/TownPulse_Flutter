@@ -9,16 +9,16 @@ class AcitivityRemoteDataSource {
   final Dio _dio = Dio();
   final String _token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDAyMzUzN2ZjN2IxNjFmMGYzOTlmZCIsImlhdCI6MTc2MDUyMDk4MywiZXhwIjoxNzY4Mjk2OTgzfQ.bZLf37qkRCcghLuTylqnNB6HiYcC9LD9KVRdVJUD2JA";
-  Future<List<Activity>> getAllActivity() async {
+  Future<List<Activity>> getAllActivity(String? token, String? category) async {
     try {
-      final Response response = await _dio.get(
-        'https://townpulse-backend-fehi.onrender.com/api/v1.0.0/activity',
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $_token',
-            'Content-Type': 'application/json',
-          },
-        ),
+      final query = (category != null && category != 'ALL')
+          ? {'category': category}
+          : null;
+
+      final Response response = await _api.get(
+        url: 'activity',
+        token: token,
+        query: query,
       );
       log('${response.data}');
 

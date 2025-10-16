@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
+import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
 import 'package:town_pulse2/features/main_screen/presentation/widgets/card_horizontal_list_of_main_screen.dart';
@@ -50,11 +51,14 @@ class MainScreen extends StatelessWidget {
             BlocBuilder<ActivityCubit, ActivityState>(
               builder: (context, state) {
                 if (state is ActivityLoading) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: ShimmerLoading());
                 } else if (state is ActivityError) {
                   return Center(child: Text(state.message));
                 } else if (state is ActivityLoaded) {
                   final activities = state.activities;
+                  if (activities.isEmpty) {
+                    return Center(child: Text('لا توجد انشطة متاحة حاليا'));
+                  }
 
                   return ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
