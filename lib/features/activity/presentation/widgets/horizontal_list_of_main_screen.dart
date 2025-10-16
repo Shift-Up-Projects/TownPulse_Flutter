@@ -21,7 +21,7 @@ class _HorizontalListOfMainScreenState
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 1 / 4.5,
+        height: MediaQuery.sizeOf(context).height * 1 / 7,
         child: Scrollbar(
           thickness: 3,
           // thumbVisibility: true,
@@ -46,9 +46,28 @@ class _HorizontalListOfMainScreenState
                     );
                   });
                 },
-                child: CardHorizontalListOfMainScreen(
-                  icon: category.icon,
-                  text: category.label,
+                child: SizedBox(
+                  // height: 100,
+                  width: MediaQuery.sizeOf(context).width * 1 / 6,
+                  // width: d,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        category.icon,
+                        // color: isSelected ? Colors.white : Colors.grey[700],
+                        size: 30,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        category.label,
+                        style: TextStyle(
+                          // color: isSelected ? Colors.white : Colors.black87,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

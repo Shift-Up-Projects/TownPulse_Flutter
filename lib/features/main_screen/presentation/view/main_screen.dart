@@ -66,7 +66,10 @@ class MainScreen extends StatelessWidget {
                     itemCount: activities.length,
                     itemBuilder: (context, index) {
                       final activity = activities[index];
-                      return CardOfActivity(activity: activity);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: CardOfActivity(activity: activity),
+                      );
                     },
                   );
                 }
