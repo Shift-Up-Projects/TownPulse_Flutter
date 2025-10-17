@@ -128,7 +128,7 @@ class _SignInBodyState extends State<SignInBody> {
                       ),
                       TextButton(
                         onPressed: () {
-                          context.go(AppRouter.signInScreen);
+                          context.go(AppRouter.signUpScreen);
                         },
                         child: Text('إنشاء حساب'),
                       ),
