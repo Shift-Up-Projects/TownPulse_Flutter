@@ -98,4 +98,29 @@ class Api {
       rethrow;
     }
   }
+
+  Future<Response> delete({required String url, String? token}) async {
+    try {
+      log('➡️ DELETE Request to: $url');
+      final response = await _dio.delete(
+        url,
+        options: Options(
+          headers: {if (token != null) 'Authorization': 'Bearer $token'},
+        ),
+      );
+
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        log('✅ DELETE Success Response');
+        return response;
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+    } on DioException catch (e) {
+      log('❌ DioError on DELETE: ${e.message}');
+      rethrow;
+    }
+  }
 }

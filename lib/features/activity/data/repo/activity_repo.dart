@@ -10,4 +10,5 @@ abstract class ActivityRepo {
     required Map<String, dynamic> activityData,
   });
   Future<List<Activity>> getMyActivities(String token);
+  Future<void> deleteActivity(String id, String token);
 }

@@ -52,4 +52,17 @@ class ActivityRepoImpl implements ActivityRepo {
       throw Exception('خطأ غير متوقع: $e');
     }
   }
+
+  @override
+  Future<void> deleteActivity(String id, String token) async {
+    try {
+      await remoteDataSource.deleteActivity(id, token);
+    } on DioException catch (e) {
+      throw Exception(
+        'فشل في حذف النشاط: ${e.response?.data['message'] ?? e.message}',
+      );
+    } catch (e) {
+      throw Exception('حدث خطأ أثناء الحذف: $e');
+    }
+  }
 }

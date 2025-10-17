@@ -54,4 +54,15 @@ class ActivityCubit extends Cubit<ActivityState> {
       log(e.toString());
     }
   }
+
+  void deleteActivity(String id) async {
+    emit(ActivityLoading());
+    try {
+      await activityRepo.deleteActivity(id, token!);
+      emit(ActivityDeleted());
+      getMyActiviy();
+    } catch (e) {
+      emit(ActivityError(e.toString()));
+    }
+  }
 }

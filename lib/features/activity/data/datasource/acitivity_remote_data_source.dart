@@ -51,4 +51,8 @@ class AcitivityRemoteDataSource {
   Future<Response> getMyActivities(String token) async {
     return await Api.instance.get(url: 'activity/my/activities', token: token);
   }
+
+  Future<Response> deleteActivity(String id, String token) async {
+    return await Api.instance.delete(url: 'activity/$id', token: token);
+  }
 }
