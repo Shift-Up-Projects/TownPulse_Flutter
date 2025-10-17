@@ -37,4 +37,18 @@ class ActivityCubit extends Cubit<ActivityState> {
       emit(ActivityError(e.toString()));
     }
   }
+
+  void fetchMyActiviy() async {
+    emit(ActivityLoading());
+    try {
+      if (token == null) {
+        emit(ActivityError("User not authenticated"));
+        return;
+      }
+      final activities = await activityRepo.getMyActivities(token!);
+      emit(ActivityLoaded(activities));
+    } catch (e) {
+      emit(ActivityError(e.toString()));
+    }
+  }
 }

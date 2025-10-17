@@ -47,4 +47,8 @@ class AcitivityRemoteDataSource {
       throw Exception('فشل في إنشاء النشاط: $e');
     }
   }
+
+  Future<Response> getMyActivities(String token) async {
+    return await Api.instance.get(url: 'activity/my/activities', token: token);
+  }
 }
