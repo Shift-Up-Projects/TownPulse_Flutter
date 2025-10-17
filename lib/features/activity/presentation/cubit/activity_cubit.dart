@@ -66,14 +66,10 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
-  void updateActivity(
-    String id,
-    Map<String, dynamic> activityData,
-    String token,
-  ) async {
+  void updateActivity(String id, Map<String, dynamic> activityData) async {
     emit(ActivityLoading());
     try {
-      await activityRepo.updateActivity(id, activityData, token);
+      await activityRepo.updateActivity(id, activityData, token!);
       emit(ActivityUpdated());
       getMyActiviy();
     } catch (e) {

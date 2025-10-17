@@ -201,7 +201,11 @@ class _CreateActivityViewState extends State<CreateActivityView> {
                   onPickEnd: () => pickDateTime(context, false),
                 ),
                 const SizedBox(height: 24),
-                CreateButton(loading: isLoading, onPressed: _submit),
+                CreateButton(
+                  loading: isLoading,
+                  onPressed: _submit,
+                  text: 'انشاء نشاط',
+                ),
               ],
             ),
           ),

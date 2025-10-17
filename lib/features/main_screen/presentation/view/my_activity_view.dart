@@ -28,7 +28,7 @@ class MyActivitiesView extends StatelessWidget {
               itemCount: state.activities.length,
               itemBuilder: (context, index) {
                 final activity = state.activities[index];
-                return DeleteActivityCard(activity: activity);
+                return DeleteAndUpdateActivityCard(activity: activity);
               },
             ),
           );

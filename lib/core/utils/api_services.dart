@@ -132,7 +132,7 @@ class Api {
     try {
       log('➡️ PUT Request to: $url');
       log('   Body: $body');
-      final response = await _dio.put(
+      final response = await _dio.patch(
         url,
         data: body,
         options: Options(
@@ -153,6 +153,9 @@ class Api {
       }
     } on DioException catch (e) {
       log('❌ DioError on PUT: ${e.message}');
+      log('   Type: ${e.type}');
+      log('   Status Code: ${e.response?.statusCode}');
+      log('   Data: ${e.response?.data}');
       rethrow;
     }
   }
