@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:town_pulse2/core/utils/app_colors.dart';
 
 const List<String> _titles = [
   'الرئيسية',
   'اكتشف',
+  'نشاطاتي',
   'انشاء',
   'المفضلة',
   'الملف الشخصي',

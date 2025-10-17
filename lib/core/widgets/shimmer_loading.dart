@@ -10,15 +10,21 @@ class ShimmerLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: AppColors.bgSecondary,
-      highlightColor: AppColors.bgTertiary,
-      child: ShimmerContainer(
-        width: double.infinity,
-        height: 100,
-        borderRadius: 12,
-        shapeBorder: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+    return ListView.builder(
+      itemCount: 5,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Shimmer.fromColors(
+          baseColor: AppColors.bgSecondary,
+          highlightColor: AppColors.bgTertiary,
+          child: ShimmerContainer(
+            width: double.infinity,
+            height: 100,
+            borderRadius: 12,
+            shapeBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
         ),
       ),
     );

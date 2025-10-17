@@ -26,18 +26,30 @@ class ActivityRepoImpl implements ActivityRepo {
     );
   }
 
-  @override
   Future<List<Activity>> getMyActivities(String token) async {
     try {
       final response = await remoteDataSource.getMyActivities(token);
-      final data = response.data['data'] as List;
-      final activities = data.map((e) => Activity.fromJson(e)).toList();
+      final rawData = response.data['data'];
+
+      if (rawData == null) return [];
+
+      List<dynamic> dataList;
+
+      if (rawData is Map<String, dynamic> &&
+          rawData.containsKey('activities')) {
+        dataList = rawData['activities'];
+      } else if (rawData is List) {
+        dataList = rawData;
+      } else {
+        dataList = [];
+      }
+
+      final activities = dataList.map((e) => Activity.fromJson(e)).toList();
       return activities;
     } on DioException catch (e) {
-      log('❌ Error in getMyActivities: ${e.message}');
-      return e.message != null
-          ? throw Exception('فشل في جلب الأنشطة الخاصة: ${e.message}')
-          : throw Exception('فشل في جلب الأنشطة الخاصة');
+      throw Exception('فشل في الاتصال بالسيرفر: ${e.message}');
+    } catch (e) {
+      throw Exception('خطأ غير متوقع: $e');
     }
   }
 }
