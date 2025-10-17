@@ -14,6 +14,7 @@ class BottomNavBar extends StatelessWidget {
   final List<String> _titles = const [
     'الرئيسية',
     'اكتشف',
+    'نشاطاتي',
     'انشاء',
     'المفضلة',
     'الملف الشخصي',
@@ -22,6 +23,7 @@ class BottomNavBar extends StatelessWidget {
   final List<IconData> _icons = const [
     Icons.home,
     Icons.explore,
+    Icons.add_box,
     Icons.add_box,
     Icons.favorite,
     Icons.person,
