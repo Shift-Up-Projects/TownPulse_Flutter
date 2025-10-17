@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/features/activity/data/repo/activity_repo.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
@@ -8,7 +10,7 @@ class ActivityCubit extends Cubit<ActivityState> {
   String? currentCategory;
   ActivityCubit(this.activityRepo, this.token) : super(ActivityIntial());
 
-  Future<void> fetchAllActivity({String? category}) async {
+  Future<void> getAllActivity({String? category}) async {
     emit(ActivityLoading());
     try {
       currentCategory = category;
@@ -32,7 +34,44 @@ class ActivityCubit extends Cubit<ActivityState> {
       );
       emit(ActivityCreated(newActivity));
       // Optionally, refresh the activity list after creation
-      await fetchAllActivity(category: currentCategory);
+      await getAllActivity(category: currentCategory);
+    } catch (e) {
+      emit(ActivityError(e.toString()));
+    }
+  }
+
+  void getMyActiviy() async {
+    emit(ActivityLoading());
+    try {
+      if (token == null) {
+        emit(ActivityError("User not authenticated"));
+        return;
+      }
+      final activities = await activityRepo.getMyActivities(token!);
+      emit(ActivityLoaded(activities));
+    } catch (e) {
+      emit(ActivityError(e.toString()));
+      log(e.toString());
+    }
+  }
+
+  void deleteActivity(String id) async {
+    emit(ActivityLoading());
+    try {
+      await activityRepo.deleteActivity(id, token!);
+      emit(ActivityDeleted());
+      getMyActiviy();
+    } catch (e) {
+      emit(ActivityError(e.toString()));
+    }
+  }
+
+  void updateActivity(String id, Map<String, dynamic> activityData) async {
+    emit(ActivityLoading());
+    try {
+      await activityRepo.updateActivity(id, activityData, token!);
+      emit(ActivityUpdated());
+      getMyActiviy();
     } catch (e) {
       emit(ActivityError(e.toString()));
     }

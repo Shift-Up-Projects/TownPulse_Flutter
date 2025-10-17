@@ -35,39 +35,43 @@ class ActivityTextFields extends StatelessWidget {
           controller: descController,
         ),
         SizedBox(height: 12),
-        CustomTextField(
-          text: 'الموقع',
-          prefixIcon: Icons.location_on,
-          controller: locController,
-        ),
-        SizedBox(height: 12),
-        CustomTextField(
-          text: 'رابط الخريطة (اختياري)',
-          prefixIcon: Icons.map,
-          controller: mapUrlController,
-        ),
-        SizedBox(height: 12),
+
+        // CustomTextField(
+        //   text: 'رابط الخريطة (اختياري)',
+        //   prefixIcon: Icons.map,
+        //   controller: mapUrlController,
+        // ),
+        // SizedBox(height: 12),
         Row(
           children: [
             Expanded(
               child: CustomTextField(
-                text: 'السعر (اختياري)',
+                text: 'السعر ',
                 prefixIcon: Icons.monetization_on,
                 controller: priceController,
+                textInputType: TextInputType.number,
                 // keyboardType: TextInputType.number,
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: CustomTextField(
-                text: 'عدد الحضور (اختياري)',
+                text: 'عدد الحضور ',
                 prefixIcon: Icons.people,
+                textInputType: TextInputType.number,
                 controller: capacityController,
                 // keyboardType: TextInputType.number,
               ),
             ),
           ],
         ),
+        SizedBox(height: 12),
+        CustomTextField(
+          text: 'الموقع',
+          prefixIcon: Icons.location_on,
+          controller: locController,
+        ),
+        SizedBox(height: 12),
       ],
     );
   }

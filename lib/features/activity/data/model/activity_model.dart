@@ -1,3 +1,4 @@
+import 'package:town_pulse2/features/activity/data/model/creator.dart';
 import 'package:town_pulse2/features/activity/data/model/price.dart';
 
 class Activity {
@@ -14,7 +15,7 @@ class Activity {
   String? category;
   Price? price;
   int? capacity;
-  String? creator;
+  Creator? creator;
   DateTime? createdAt;
 
   Activity({
@@ -56,7 +57,9 @@ class Activity {
           ? null
           : Price.fromJson(json['price'] as Map<String, dynamic>),
       capacity: json['capacity'] as int?,
-      creator: json['creator'] as String?,
+      creator: json['creator'] != null
+          ? Creator.fromJson(json['creator'])
+          : null,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),

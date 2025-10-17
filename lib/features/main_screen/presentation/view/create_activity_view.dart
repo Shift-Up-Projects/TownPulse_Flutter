@@ -1,12 +1,15 @@
 // lib/features/activity/presentation/views/create_activity/create_activity_view.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/activity_text_fields.dart';
+import 'package:town_pulse2/features/activity/presentation/widgets/button_select_location.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/category_selector.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/create_button.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/date_time_picker.dart';
+import 'package:town_pulse2/features/main_screen/presentation/view/select_location_view.dart';
 
 class CreateActivityView extends StatefulWidget {
   const CreateActivityView({super.key});
@@ -30,6 +33,9 @@ class _CreateActivityViewState extends State<CreateActivityView> {
   DateTime? endDate;
   String selectedCategory = 'MUSIC';
   bool isLoading = false;
+  double? latitude;
+  double? longitude;
+  String? mapUrl;
 
   Future<void> pickDateTime(BuildContext ctx, bool isStart) async {
     final pickedDate = await showDatePicker(
@@ -65,7 +71,13 @@ class _CreateActivityViewState extends State<CreateActivityView> {
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
 
-    // validation: start < end (if provided)
+    if (latitude == null || longitude == null || mapUrl == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('يرجى اختيار موقع النشاط على الخريطة')),
+      );
+      return;
+    }
+
     if (startDate != null && endDate != null && startDate!.isAfter(endDate!)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('تأكد من أن تاريخ البداية قبل النهاية')),
@@ -77,15 +89,22 @@ class _CreateActivityViewState extends State<CreateActivityView> {
       "title": titleController.text.trim(),
       "description": descController.text.trim(),
       "location": locController.text.trim(),
-      "map_url": mapUrlController.text.trim(),
+      "map_url":
+          mapUrl ??
+          "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude",
+      "latitude": latitude,
+      "longitude": longitude,
       "start_date": startDate?.toUtc().toIso8601String(),
-      "end_date": endDate?.toUtc().toIso8601String(),
-      "price": double.tryParse(priceController.text) ?? 0,
-      "capacity": int.tryParse(capacityController.text) ?? 0,
+      "end_date": startDate!.add(Duration(hours: 2)).toUtc().toIso8601String(),
+      "price": priceController.text.isEmpty
+          ? 0
+          : double.parse(priceController.text),
+      "capacity": capacityController.text.isEmpty
+          ? 0
+          : int.parse(capacityController.text),
       "category": selectedCategory,
     };
 
-    // استدعاء الكيوبت
     context.read<ActivityCubit>().createActivity(activityData);
   }
 
@@ -101,13 +120,19 @@ class _CreateActivityViewState extends State<CreateActivityView> {
 
         if (state is ActivityCreated) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('تم إنشاء النشاط بنجاح')),
+            const SnackBar(
+              content: Text('تم إنشاء النشاط بنجاح'),
+              backgroundColor: AppColors.secondary,
+            ),
           );
-          Navigator.pop(context, true); // ارجع مع نتيجة ناجحة
+          // Navigator.pop(context, true);
         } else if (state is ActivityError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: AppColors.error,
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -125,9 +150,38 @@ class _CreateActivityViewState extends State<CreateActivityView> {
                   priceController: priceController,
                   capacityController: capacityController,
                 ),
+                const SizedBox(height: 12),
+
+                ButtonSelectLocation(
+                  onPressed: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SelectLocationView(),
+                      ),
+                    );
+
+                    if (result != null) {
+                      setState(() {
+                        latitude = result['latitude'];
+                        longitude = result['longitude'];
+                        mapUrl = result['mapUrl'];
+                      });
+                    }
+                  },
+                ),
+
+                if (latitude != null && longitude != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      '📍 تم اختيار الموقع:\nLat: $latitude\nLng: $longitude',
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                  ),
                 const SizedBox(height: 16),
                 const Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.centerRight,
                   child: Text(
                     'اختر الفئة:',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -147,7 +201,11 @@ class _CreateActivityViewState extends State<CreateActivityView> {
                   onPickEnd: () => pickDateTime(context, false),
                 ),
                 const SizedBox(height: 24),
-                CreateButton(loading: isLoading, onPressed: _submit),
+                CreateButton(
+                  loading: isLoading,
+                  onPressed: _submit,
+                  text: 'انشاء نشاط',
+                ),
               ],
             ),
           ),

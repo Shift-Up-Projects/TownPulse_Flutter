@@ -93,6 +93,69 @@ class Api {
       }
     } on DioException catch (e) {
       log('❌ DioError on POST: ${e.message}');
+      log('❌ Error Response Body: ${e.response?.data}');
+
+      rethrow;
+    }
+  }
+
+  Future<Response> delete({required String url, String? token}) async {
+    try {
+      log('➡️ DELETE Request to: $url');
+      final response = await _dio.delete(
+        url,
+        options: Options(
+          headers: {if (token != null) 'Authorization': 'Bearer $token'},
+        ),
+      );
+
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        log('✅ DELETE Success Response');
+        return response;
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+    } on DioException catch (e) {
+      log('❌ DioError on DELETE: ${e.message}');
+      rethrow;
+    }
+  }
+
+  Future<Response> put({
+    required String url,
+    required dynamic body,
+    String? token,
+  }) async {
+    try {
+      log('➡️ PUT Request to: $url');
+      log('   Body: $body');
+      final response = await _dio.patch(
+        url,
+        data: body,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            if (token != null) 'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        log('✅ PUT Success Response');
+        return response;
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+    } on DioException catch (e) {
+      log('❌ DioError on PUT: ${e.message}');
+      log('   Type: ${e.type}');
+      log('   Status Code: ${e.response?.statusCode}');
+      log('   Data: ${e.response?.data}');
       rethrow;
     }
   }

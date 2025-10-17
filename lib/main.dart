@@ -36,7 +36,7 @@ class TownPulse extends StatelessWidget {
         ActivityRepoImpl(AcitivityRemoteDataSource()),
         // TODO: Replace 'yourSecondArgument' with the actual required argument
         CacheHelper.getData(key: 'token'),
-      )..fetchAllActivity(category: null),
+      )..getAllActivity(category: null),
       child: MaterialApp.router(
         theme: AppThemes.darkTheme,
         debugShowCheckedModeBanner: false,

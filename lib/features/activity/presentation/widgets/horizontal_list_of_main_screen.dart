@@ -39,7 +39,7 @@ class _HorizontalListOfMainScreenState
                 onTap: () {
                   setState(() {
                     selectedCategory = category.key;
-                    activiyCubit.fetchAllActivity(
+                    activiyCubit.getAllActivity(
                       category: selectedCategory == 'ALL'
                           ? null
                           : selectedCategory,

@@ -18,7 +18,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
   void _ref(BuildContext context) {
-    context.read<ActivityCubit>().fetchAllActivity();
+    context.read<ActivityCubit>().getAllActivity();
   }
 
   @override

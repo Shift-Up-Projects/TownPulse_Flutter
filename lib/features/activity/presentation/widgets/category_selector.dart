@@ -48,14 +48,18 @@ class CategorySelector extends StatelessWidget {
                 children: [
                   Icon(
                     item['icon'] as IconData,
-                    color: isSelected ? AppColors.primary : Colors.grey[600],
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.overlayWhite90,
                     size: 36,
                   ),
                   const SizedBox(height: 6),
                   Text(
                     item['name'] as String,
                     style: TextStyle(
-                      color: isSelected ? AppColors.primary : Colors.grey[800],
+                      color: isSelected
+                          ? AppColors.primary
+                          : AppColors.overlayWhite90,
                       fontWeight: isSelected
                           ? FontWeight.bold
                           : FontWeight.w500,

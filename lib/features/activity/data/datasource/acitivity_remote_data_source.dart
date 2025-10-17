@@ -42,9 +42,29 @@ class AcitivityRemoteDataSource {
         body: activityData,
       );
       final data = response.data['data'];
-      return Activity.fromJson(data);
+      return Activity.fromJson(data as Map<String, dynamic>);
     } on Exception catch (e) {
       throw Exception('فشل في إنشاء النشاط: $e');
     }
+  }
+
+  Future<Response> getMyActivities(String token) async {
+    return await Api.instance.get(url: 'activity/my/activities', token: token);
+  }
+
+  Future<Response> deleteActivity(String id, String token) async {
+    return await Api.instance.delete(url: 'activity/$id', token: token);
+  }
+
+  Future<Response> updateActivity(
+    String id,
+    Map<String, dynamic> activityData,
+    String token,
+  ) async {
+    return await Api.instance.put(
+      url: 'activity/$id',
+      body: activityData,
+      token: token,
+    );
   }
 }

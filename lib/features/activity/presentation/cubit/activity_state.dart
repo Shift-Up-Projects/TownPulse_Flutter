@@ -25,3 +25,7 @@ class ActivityCreated extends ActivityState {
   @override
   List<Object?> get props => [activity];
 }
+
+class ActivityDeleted extends ActivityState {}
+
+class ActivityUpdated extends ActivityState {}

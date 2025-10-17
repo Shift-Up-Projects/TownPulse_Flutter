@@ -5,11 +5,13 @@ import 'package:town_pulse2/core/utils/app_colors.dart';
 class CreateButton extends StatelessWidget {
   final bool loading;
   final VoidCallback onPressed;
+  final String text;
 
   const CreateButton({
     super.key,
     required this.loading,
     required this.onPressed,
+    required this.text,
   });
 
   @override
@@ -30,8 +32,8 @@ class CreateButton extends StatelessWidget {
                     color: Colors.white,
                   ),
                 )
-              : const Text(
-                  'إنشاء النشاط',
+              : Text(
+                  text,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
         ),
