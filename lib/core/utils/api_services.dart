@@ -93,6 +93,8 @@ class Api {
       }
     } on DioException catch (e) {
       log('❌ DioError on POST: ${e.message}');
+      log('❌ Error Response Body: ${e.response?.data}');
+
       rethrow;
     }
   }

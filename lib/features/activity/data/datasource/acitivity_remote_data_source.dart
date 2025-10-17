@@ -42,7 +42,7 @@ class AcitivityRemoteDataSource {
         body: activityData,
       );
       final data = response.data['data'];
-      return Activity.fromJson(data);
+      return Activity.fromJson(data as Map<String, dynamic>);
     } on Exception catch (e) {
       throw Exception('فشل في إنشاء النشاط: $e');
     }

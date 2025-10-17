@@ -34,6 +34,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         TextFormField(
+          keyboardType: textInputType,
           controller: controller,
           obscureText: obscureText,
           textDirection: TextDirection.rtl,
