@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
-import 'package:town_pulse2/features/activity/presentation/widgets/card_of_activities.dart';
+import 'package:town_pulse2/features/activity/presentation/widgets/delete_activity_card.dart';
 
 class MyActivitiesView extends StatelessWidget {
   const MyActivitiesView({super.key});
@@ -26,8 +26,10 @@ class MyActivitiesView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
             child: ListView.builder(
               itemCount: state.activities.length,
-              itemBuilder: (context, index) =>
-                  CardOfActivity(activity: state.activities[index]),
+              itemBuilder: (context, index) {
+                final activity = state.activities[index];
+                return DeleteActivityCard(activity: activity);
+              },
             ),
           );
         }
