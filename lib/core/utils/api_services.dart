@@ -123,4 +123,37 @@ class Api {
       rethrow;
     }
   }
+
+  Future<Response> put({
+    required String url,
+    required dynamic body,
+    String? token,
+  }) async {
+    try {
+      log('➡️ PUT Request to: $url');
+      log('   Body: $body');
+      final response = await _dio.put(
+        url,
+        data: body,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            if (token != null) 'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        log('✅ PUT Success Response');
+        return response;
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+    } on DioException catch (e) {
+      log('❌ DioError on PUT: ${e.message}');
+      rethrow;
+    }
+  }
 }

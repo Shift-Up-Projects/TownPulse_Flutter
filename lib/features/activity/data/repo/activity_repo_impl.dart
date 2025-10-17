@@ -65,4 +65,21 @@ class ActivityRepoImpl implements ActivityRepo {
       throw Exception('حدث خطأ أثناء الحذف: $e');
     }
   }
+
+  @override
+  Future<void> updateActivity(
+    String id,
+    Map<String, dynamic> activityData,
+    String token,
+  ) async {
+    try {
+      await remoteDataSource.updateActivity(id, activityData, token);
+    } on DioException catch (e) {
+      throw Exception(
+        'فشل في تعديل النشاط: ${e.response?.data['message'] ?? e.message}',
+      );
+    } catch (e) {
+      throw Exception('حدث خطأ أثناء التعديل: $e');
+    }
+  }
 }

@@ -55,4 +55,16 @@ class AcitivityRemoteDataSource {
   Future<Response> deleteActivity(String id, String token) async {
     return await Api.instance.delete(url: 'activity/$id', token: token);
   }
+
+  Future<Response> updateActivity(
+    String id,
+    Map<String, dynamic> activityData,
+    String token,
+  ) async {
+    return await Api.instance.put(
+      url: 'activity/$id',
+      body: activityData,
+      token: token,
+    );
+  }
 }

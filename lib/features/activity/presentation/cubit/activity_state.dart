@@ -27,3 +27,5 @@ class ActivityCreated extends ActivityState {
 }
 
 class ActivityDeleted extends ActivityState {}
+
+class ActivityUpdated extends ActivityState {}
