@@ -1,11 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/features/activity/presentation/views/details_dialog_activities.dart';
+import 'package:town_pulse2/features/auth/data/model/user_model.dart';
 import 'package:town_pulse2/features/auth/presentation/view/forget_password_view.dart';
 import 'package:town_pulse2/features/auth/presentation/view/sign_in_view.dart';
 import 'package:town_pulse2/features/auth/presentation/view/sign_up_view.dart';
 import 'package:town_pulse2/features/home/presentation/views/home_view.dart';
 import 'package:town_pulse2/features/intro/presentation/view/intro_view.dart';
 import 'package:town_pulse2/features/main_screen/presentation/view/my_activity_view.dart';
+import 'package:town_pulse2/features/profile/presentation/views/update_password_view.dart';
+import 'package:town_pulse2/features/profile/presentation/views/update_profile_view.dart';
 import 'package:town_pulse2/features/splash/presentation/view/splash_view.dart';
 
 class AppRouter {
@@ -16,6 +19,8 @@ class AppRouter {
   static const forgetPasswordScreen = '/forgetPasswordScreen';
   static const homeScreen = '/homeScreen';
   static const myActivityView = '/myActivityView';
+  static const updateProfileView = '/updateProfileView';
+  static const updatePasswordView = '/updatePasswordView';
 
   static final router = GoRouter(
     routes: [
@@ -33,6 +38,15 @@ class AppRouter {
         builder: (context, state) => ForgetPasswordView(),
       ),
       GoRoute(path: homeScreen, builder: (context, state) => HomeView()),
+      GoRoute(
+        path: updatePasswordView,
+        builder: (context, state) => UpdatePasswordView(),
+      ),
+      GoRoute(
+        path: updateProfileView,
+        builder: (context, state) =>
+            UpdateProfileView(user: state.extra as User),
+      ),
     ],
   );
 }
