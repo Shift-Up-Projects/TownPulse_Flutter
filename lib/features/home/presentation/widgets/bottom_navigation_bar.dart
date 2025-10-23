@@ -13,7 +13,6 @@ class BottomNavBar extends StatelessWidget {
 
   final List<String> _titles = const [
     'الرئيسية',
-    'اكتشف',
     'نشاطاتي',
     'انشاء',
     'المفضلة',

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 const List<String> _titles = [
   'الرئيسية',
-  'اكتشف',
-  'نشاطاتي',
+  'الانشطة التي قمت بإنشائها',
   'انشاء',
   'المفضلة',
   'الملف الشخصي',

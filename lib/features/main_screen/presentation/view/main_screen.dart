@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
+import 'package:town_pulse2/features/activity/get_near_by_gio.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/card_horizontal_list_of_main_screen.dart';
@@ -44,6 +45,7 @@ class MainScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
                 const Spacer(),
                 TextButton(onPressed: () {}, child: Text('عرض الكل')),
               ],
