@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/auth/data/repo/auth_repo_Impl.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/create_button.dart';
@@ -24,16 +25,13 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
   void _submitUpdate(BuildContext cubitContext) {
     if (_formKey.currentState!.validate()) {
       if (newPasswordController.text != confirmPasswordController.text) {
-        ScaffoldMessenger.of(cubitContext).showSnackBar(
-          // استخدم cubitContext هنا أيضاً
-          const SnackBar(
-            content: Text('كلمة المرور الجديدة وتأكيدها غير متطابقين'),
-          ),
+        ShowToast(
+          message: 'كلمة المرور الجديدة وتأكيدها غير متطابقين',
+          state: toastState.error,
         );
         return;
       }
 
-      // ✅ استخدام الـ cubitContext الذي تم تمريره
       ProfileCubit.get(cubitContext).updatePassword(
         currentPassword: currentPasswordController.text,
         newPassword: newPasswordController.text,
@@ -50,19 +48,13 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
         body: BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
             if (state is PasswordUpdateSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: AppColors.secondary,
-                ),
-              );
+              ShowToast(message: state.message, state: toastState.success);
+
               Navigator.pop(context);
             } else if (state is PasswordUpdateError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('فشل التحديث: ${state.message}'),
-                  backgroundColor: AppColors.error,
-                ),
+              ShowToast(
+                message: 'فشل التحديث: ${state.message}',
+                state: toastState.error,
               );
             }
           },

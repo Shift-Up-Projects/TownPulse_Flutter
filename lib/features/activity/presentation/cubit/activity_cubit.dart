@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/repo/activity_repo.dart';
 import 'package:town_pulse2/features/activity/get_near_by_gio.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
@@ -104,8 +105,6 @@ void getNearbyActivities(BuildContext context) async {
       );
     }
   } catch (e) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(e.toString())));
+    ShowToast(message: e.toString(), state: toastState.error);
   }
 }

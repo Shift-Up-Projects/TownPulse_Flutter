@@ -6,6 +6,7 @@ import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/auth/data/repo/auth_repo_Impl.dart';
 import 'package:town_pulse2/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:town_pulse2/features/profile/presentation/cubit/profile_state.dart';
@@ -23,9 +24,7 @@ class ProfileView extends StatelessWidget {
             context.go(AppRouter.signInScreen);
           }
           if (state is ProfileError) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            ShowToast(message: state.message, state: toastState.error);
           }
         },
         builder: (context, state) {
@@ -96,10 +95,9 @@ class ProfileView extends StatelessWidget {
                         context.read<ProfileCubit>().fetchCurrentUser();
                       }
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('لا يمكن جلب بيانات المستخدم للتعديل'),
-                        ),
+                      ShowToast(
+                        message: 'لا يمكن جلب بيانات المستخدم للتعديل',
+                        state: toastState.error,
                       );
                     }
                   },
