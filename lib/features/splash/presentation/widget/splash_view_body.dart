@@ -3,10 +3,21 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
-import 'package:town_pulse2/features/intro/presentation/view/intro_view.dart';
+import 'package:town_pulse2/core/helper/CachHepler.dart';
+import 'package:town_pulse2/core/utils/api_services.dart';
 
 class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});
+
+  void _checkAuthenAndNavigate(BuildContext context) {
+    final token = CacheHelper.getData(key: 'token');
+    if (token != null && token.toString().isNotEmpty) {
+      Api.instance.setToken(token as String);
+      GoRouter.of(context).go(AppRouter.homeScreen);
+    } else {
+      GoRouter.of(context).go(AppRouter.introScreen);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +36,7 @@ class SplashViewBody extends StatelessWidget {
               .then()
               .callback(
                 callback: (value) {
-                  context.go(AppRouter.introScreen);
-                  // MaterialPageRoute(builder: (context) => const IntroView());
+                  _checkAuthenAndNavigate(context);
                 },
               ),
           Text('Town', style: Styles.textStyle30).animate().slide(

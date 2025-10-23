@@ -1,3 +1,5 @@
+// lib/features/auth/presentation/widgets/sign_in_body.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +8,6 @@ import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/core/widgets/custom_loading_indactor.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
-import 'package:town_pulse2/features/auth/data/repo/auth_repo.dart';
 import 'package:town_pulse2/features/auth/data/repo/auth_repo_Impl.dart';
 import 'package:town_pulse2/features/auth/presentation/manger/user_login_cubit/user_login_cubit.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_button.dart';
@@ -40,6 +41,11 @@ class _SignInBodyState extends State<SignInBody> {
       child: BlocConsumer<UserLoginCubit, UserLoginState>(
         listener: (context, state) {
           CheckUserLogin(state);
+          if (state is UserLoginSuccessfullyState) {
+            Future.microtask(() {
+              context.go(AppRouter.homeScreen);
+            });
+          }
         },
         builder: (context, state) {
           var cubit = UserLoginCubit.get(context);
@@ -92,7 +98,8 @@ class _SignInBodyState extends State<SignInBody> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          context.go(AppRouter.signInScreen);
+                          // ✅ تصحيح المسار
+                          context.go(AppRouter.forgetPasswordScreen);
                         },
                         child: Text('نسيت كلمة المرور؟'),
                       ),
@@ -111,7 +118,6 @@ class _SignInBodyState extends State<SignInBody> {
                             userName: emailController.text,
                             password: passwordController.text,
                           );
-                          context.go(AppRouter.homeScreen);
                         } else {
                           autovalidateMode = AutovalidateMode.always;
                         }
@@ -128,7 +134,8 @@ class _SignInBodyState extends State<SignInBody> {
                       ),
                       TextButton(
                         onPressed: () {
-                          context.go(AppRouter.signInScreen);
+                          // ✅ تصحيح المسار
+                          context.go(AppRouter.signUpScreen);
                         },
                         child: Text('إنشاء حساب'),
                       ),
