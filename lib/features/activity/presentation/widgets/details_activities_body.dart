@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:town_pulse2/core/helper/CachHepler.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
+import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/features/activity/data/category_consts.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
+import 'package:town_pulse2/features/attedence/presentation/cubit/attedence_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsActivitiesBody extends StatelessWidget {
@@ -89,15 +95,45 @@ class DetailsActivitiesBody extends StatelessWidget {
                       child: const Text("اغلاق"),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                      ),
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text("حجز الآن"),
-                    ),
+                  BlocConsumer<AttendanceCubit, AttendanceState>(
+                    listener: (context, state) {
+                      if (state is AttendanceSuccess) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('تم تسجيل حضورك بنجاح ✅'),
+                            backgroundColor: AppColors.success,
+                          ),
+                        );
+                      } else if (state is AttendanceError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                            backgroundColor: AppColors.statusCancelled,
+                          ),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is AttendanceLoading) return ShimmerContainer();
+                      return Align(
+                        alignment: Alignment.centerLeft,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                          ),
+                          onPressed: () {
+                            final userId = CacheHelper.getData(key: 'user_id');
+                            log('🧍 userId: $userId');
+                            log('🎯 activityId: ${activity.id}');
+                            context.read<AttendanceCubit>().markAttendance(
+                              userId: userId,
+                              activityId: activity.id!,
+                            );
+                          },
+                          child: const Text("حجز الآن"),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

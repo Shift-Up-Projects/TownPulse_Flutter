@@ -19,9 +19,12 @@ class AuthRepoImpl implements AuthRepo {
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         final token = response.data['data']['token'] as String;
 
-        // 🟢 حفظ التوكن في Api Singleton
         Api.instance.setToken(token);
         await CacheHelper.saveData(key: 'token', value: token);
+        await CacheHelper.saveData(
+          key: 'user_id',
+          value: response.data['data']['user']['_id'],
+        );
 
         log('Login Success. Token: $token');
 

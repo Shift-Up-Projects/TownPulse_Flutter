@@ -47,7 +47,17 @@ class MainScreen extends StatelessWidget {
                 ),
 
                 const Spacer(),
-                TextButton(onPressed: () {}, child: Text('عرض الكل')),
+                TextButton(
+                  onPressed: () async {
+                    await getNearby(context);
+                  },
+                  child: Text(
+                    ' الانشطة القريبة',
+                    style: Styles.textStyle14.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
             BlocBuilder<ActivityCubit, ActivityState>(
