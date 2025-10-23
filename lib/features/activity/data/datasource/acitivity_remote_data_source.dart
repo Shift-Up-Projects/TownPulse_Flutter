@@ -67,4 +67,24 @@ class AcitivityRemoteDataSource {
       token: token,
     );
   }
+
+  Future<List<Activity>> getNearByActivities({
+    required double latitude,
+    required double longitude,
+  }) async {
+    try {
+      final response = await Api.instance.get(
+        url: 'activity/near?latitude=$latitude&longitude=$longitude',
+      );
+      if (response.statusCode == 200 && response.data['isSuccess'] == true) {
+        final List<dynamic> data = response.data['data'];
+        return data.map((e) => Activity.fromJson(e)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      log('❌ Error fetching nearby activities: $e');
+      return [];
+    }
+  }
 }

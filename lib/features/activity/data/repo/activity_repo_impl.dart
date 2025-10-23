@@ -82,4 +82,15 @@ class ActivityRepoImpl implements ActivityRepo {
       throw Exception('حدث خطأ أثناء التعديل: $e');
     }
   }
+
+  @override
+  Future<List<Activity>> getNearbyActivities({
+    required double latitude,
+    required double longitude,
+  }) async {
+    return await remoteDataSource.getNearByActivities(
+      latitude: latitude,
+      longitude: longitude,
+    );
+  }
 }

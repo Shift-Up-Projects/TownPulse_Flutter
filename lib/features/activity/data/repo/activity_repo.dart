@@ -16,4 +16,8 @@ abstract class ActivityRepo {
     Map<String, dynamic> activityData,
     String token,
   );
+  Future<List<Activity>> getNearbyActivities({
+    required double latitude,
+    required double longitude,
+  });
 }
