@@ -5,7 +5,6 @@ import 'package:town_pulse2/features/main_screen/presentation/view/my_activity_v
 
 final List<Widget> screens = [
   const MainScreen(),
-  const Center(child: Text('اكتشف')),
   const MyActivitiesView(),
 
   CreateActivityView(),

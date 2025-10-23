@@ -25,7 +25,7 @@ class _SplashViewState extends State<SplashView> {
   }
 
   Future<void> _checkAuthenAndNavigate() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 4));
     final token = CacheHelper.getData(key: 'token');
     if (token != null && token.toString().isNotEmpty) {
       Api.instance.setToken(token);
