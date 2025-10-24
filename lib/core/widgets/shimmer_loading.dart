@@ -1,10 +1,7 @@
-// lib/core/widget/shimmer_loading.dart
-
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 
-// هذا هو الويدجت الرئيسي لتأثير Shimmer
 class ShimmerLoading extends StatelessWidget {
   const ShimmerLoading({super.key});
 

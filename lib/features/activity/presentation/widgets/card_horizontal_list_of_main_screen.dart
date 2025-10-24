@@ -13,8 +13,8 @@ class CardHorizontalListOfMainScreen extends StatelessWidget {
   final isSelected;
   @override
   Widget build(BuildContext context) {
-    final bg = isSelected ? Theme.of(context).primaryColor : Colors.white;
-    final txtColor = isSelected ? Colors.white : Colors.black87;
+    // final bg = isSelected ? Theme.of(context).primaryColor : Colors.white;
+    // final txtColor = isSelected ? Colors.white : Colors.black87;
     final iconColor = isSelected ? Colors.white : Colors.black54;
 
     return AnimatedContainer(

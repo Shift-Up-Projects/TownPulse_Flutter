@@ -28,7 +28,6 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
       ),
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
-          // ✅ تعديل النشاط
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
@@ -36,9 +35,8 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
             ),
           );
           if (result == true) context.read<ActivityCubit>().getMyActiviy();
-          return false; // ما نحذف العنصر
+          return false;
         } else if (direction == DismissDirection.endToStart) {
-          // 🗑 حذف النشاط
           final confirm = await showDialog(
             context: context,
             builder: (_) => AlertDialog(

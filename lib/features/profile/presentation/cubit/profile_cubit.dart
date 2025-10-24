@@ -70,16 +70,25 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> userLogout() async {
     if (token == null) {
-      emit(ProfileLogoutSuccess());
+      if (!isClosed) {
+        emit(ProfileLogoutSuccess());
+      }
       return;
     }
 
     final result = await authRepo.userLogout(token!);
+
     result.fold(
       ifLeft: (failure) {
-        emit(ProfileLogoutSuccess());
+        if (!isClosed) {
+          emit(ProfileLogoutSuccess());
+        }
       },
-      ifRight: (message) => emit(ProfileLogoutSuccess()),
+      ifRight: (message) {
+        if (!isClosed) {
+          emit(ProfileLogoutSuccess());
+        }
+      },
     );
   }
 }

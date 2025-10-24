@@ -1,12 +1,11 @@
-// lib/features/auth/data/repo/auth_repo_Impl.dart
 import 'dart:developer';
+import 'dart:convert';
 import 'package:dart_either/dart_either.dart';
 import 'package:dio/dio.dart';
 import 'package:town_pulse2/core/errors/failure.dart';
 import 'package:town_pulse2/core/helper/CachHepler.dart';
 import 'package:town_pulse2/core/utils/api_services.dart';
 import 'package:town_pulse2/features/auth/data/repo/auth_repo.dart';
-// ✅ استيراد موديل المستخدم
 import 'package:town_pulse2/features/auth/data/model/user_model.dart';
 
 class AuthRepoImpl implements AuthRepo {
@@ -29,11 +28,16 @@ class AuthRepoImpl implements AuthRepo {
         }
 
         final token = responseData['token'] as String;
-        final userId = responseData['user']['_id'];
+        final userData = responseData['user'] as Map<String, dynamic>;
+        final userId = userData['_id'];
 
         Api.instance.setToken(token);
         await CacheHelper.saveData(key: 'token', value: token);
         await CacheHelper.saveData(key: 'user_id', value: userId);
+        await CacheHelper.saveData(
+          key: 'user_data_json',
+          value: json.encode(userData),
+        );
 
         log('Login Success. Token: $token');
 
@@ -52,51 +56,31 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<Either<Failure, String>> userSignUp() {
-    // TODO: implement userSignUp
     throw UnimplementedError();
   }
 
   @override
   Future<Either<Failure, User>> fetchCurrentUser(String token) async {
     try {
-      final userId = CacheHelper.getData(key: 'user_id') as String?;
+      final userDataJson =
+          CacheHelper.getData(key: 'user_data_json') as String?;
 
-      if (userId == null) {
+      if (userDataJson == null || userDataJson.isEmpty) {
         return Left(
           ServerFailure(
-            'معرف المستخدم غير موجود محلياً. الرجاء تسجيل الدخول مرة أخرى.',
+            'لا تتوفر بيانات الملف الشخصي محلياً. يرجى إعادة تسجيل الدخول.',
           ),
         );
       }
 
-      final response = await Api.instance.get(
-        url: 'users/$userId',
-        token: token,
-      );
+      final userData = json.decode(userDataJson) as Map<String, dynamic>;
+      final user = User.fromJson(userData);
 
-      if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        // ✅ FIX: الوصول مباشرة إلى 'data' وهو كائن المستخدم
-        final userData = response.data?['data'];
-
-        if (userData == null || userData is! Map<String, dynamic>) {
-          return Left(
-            ServerFailure(
-              'لم يتم العثور على بيانات المستخدم أو هيكلها غير صحيح.',
-            ),
-          );
-        }
-
-        final user = User.fromJson(userData as Map<String, dynamic>);
-        return Right(user);
-      } else {
-        return Left(
-          ServerFailure.fromResponse(response.statusCode ?? 500, response.data),
-        );
-      }
-    } on DioException catch (e) {
-      return Left(ServerFailure.fromDioException(e));
+      return Right(user);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(
+        ServerFailure('فشل في تحليل بيانات المستخدم المحلية: ${e.toString()}'),
+      );
     }
   }
 
@@ -121,7 +105,12 @@ class AuthRepoImpl implements AuthRepo {
         }
 
         final user = User.fromJson(userData);
-        await fetchCurrentUser(token);
+
+        await CacheHelper.saveData(
+          key: 'user_data_json',
+          value: json.encode(userData),
+        );
+
         return Right(user);
       } else {
         return Left(
@@ -170,12 +159,14 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, String>> userLogout(String token) async {
     try {
       await Api.instance.get(url: 'users/logout', token: token);
+      await CacheHelper.removeData(key: 'user_data_json');
       await CacheHelper.removeData(key: 'token');
       await CacheHelper.removeData(key: 'user_id');
       Api.instance.setToken('');
 
       return const Right('تم تسجيل الخروج بنجاح');
-    } on DioException catch (e) {
+    } on DioException {
+      await CacheHelper.removeData(key: 'user_data_json');
       await CacheHelper.removeData(key: 'token');
       await CacheHelper.removeData(key: 'user_id');
       Api.instance.setToken('');

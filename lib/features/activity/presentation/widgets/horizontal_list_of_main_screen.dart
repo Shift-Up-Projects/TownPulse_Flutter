@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/features/activity/data/category_consts.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
-import 'package:town_pulse2/features/activity/presentation/widgets/card_horizontal_list_of_main_screen.dart';
 
 class HorizontalListOfMainScreen extends StatefulWidget {
   HorizontalListOfMainScreen({super.key});
@@ -34,7 +33,6 @@ class _HorizontalListOfMainScreenState
             itemCount: categoriesList.length,
             itemBuilder: (context, index) {
               final category = categoriesList[index];
-              final isSelected = category.key == selectedCategory;
               return GestureDetector(
                 onTap: () {
                   setState(() {

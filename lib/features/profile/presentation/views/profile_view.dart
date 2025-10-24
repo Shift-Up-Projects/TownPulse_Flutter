@@ -21,10 +21,17 @@ class ProfileView extends StatelessWidget {
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileLogoutSuccess) {
-            context.go(AppRouter.signInScreen);
+            // 🔑 FIX: استخدام Future.delayed(Duration.zero) لضمان اكتمال
+            // عملية الـ emit قبل إغلاق الـ Cubit بواسطة التنقل.
+            Future.delayed(Duration.zero, () {
+              // توجيه المستخدم لشاشة تسجيل الدخول بعد الخروج
+              context.go(AppRouter.signInScreen);
+            });
           }
           if (state is ProfileError) {
-            ShowToast(message: state.message, state: toastState.error);
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {

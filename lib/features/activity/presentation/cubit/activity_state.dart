@@ -22,7 +22,6 @@ class ActivityCreated extends ActivityState {
   final Activity activity;
   ActivityCreated(this.activity);
 
-  @override
   List<Object?> get props => [activity];
 }
 
