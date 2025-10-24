@@ -23,7 +23,6 @@ class BottomNavBar extends StatelessWidget {
     Icons.home,
     Icons.explore,
     Icons.add_box,
-    Icons.add_box,
     Icons.favorite,
     Icons.person,
   ];

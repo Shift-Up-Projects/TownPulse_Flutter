@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/activity_text_fields.dart';
@@ -72,15 +73,18 @@ class _CreateActivityViewState extends State<CreateActivityView> {
     if (!_formKey.currentState!.validate()) return;
 
     if (latitude == null || longitude == null || mapUrl == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('يرجى اختيار موقع النشاط على الخريطة')),
+      ShowToast(
+        message: 'يرجى اختيار موقع النشاط على الخريطة',
+        state: toastState.warning,
       );
+
       return;
     }
 
     if (startDate != null && endDate != null && startDate!.isAfter(endDate!)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تأكد من أن تاريخ البداية قبل النهاية')),
+      ShowToast(
+        message: 'تأكد من أن تاريخ البداية قبل النهاية',
+        state: toastState.warning,
       );
       return;
     }
@@ -119,20 +123,13 @@ class _CreateActivityViewState extends State<CreateActivityView> {
         }
 
         if (state is ActivityCreated) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('تم إنشاء النشاط بنجاح'),
-              backgroundColor: AppColors.secondary,
-            ),
+          ShowToast(
+            message: 'تم إنشاء النشاط بنجاح',
+            state: toastState.success,
           );
           // Navigator.pop(context, true);
         } else if (state is ActivityError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: AppColors.error,
-            ),
-          );
+          ShowToast(message: state.message, state: toastState.error);
         }
       },
       builder: (context, state) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
@@ -88,8 +89,9 @@ class _EditActivityViewState extends State<EditActivityView> {
     if (!_formKey.currentState!.validate()) return;
 
     if (startDate != null && endDate != null && startDate!.isAfter(endDate!)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تاريخ البداية يجب أن يكون قبل النهاية')),
+      ShowToast(
+        message: 'تاريخ البداية يجب أن يكون قبل النهاية',
+        state: toastState.error,
       );
       return;
     }
@@ -125,14 +127,13 @@ class _EditActivityViewState extends State<EditActivityView> {
           setState(() => isLoading = false);
 
         if (state is ActivityUpdated) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('تم تحديث النشاط بنجاح')),
+          ShowToast(
+            message: 'تم تحديث النشاط بنجاح',
+            state: toastState.success,
           );
           Navigator.pop(context, true);
         } else if (state is ActivityError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ShowToast(message: state.message, state: toastState.error);
         }
       },
       builder: (context, state) {

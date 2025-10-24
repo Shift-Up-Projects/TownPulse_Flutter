@@ -6,7 +6,7 @@ import 'package:town_pulse2/core/helper/CachHepler.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
-import 'package:town_pulse2/features/activity/data/category_consts.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/attedence/presentation/cubit/attedence_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,9 +20,7 @@ class DetailsActivitiesBody extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('لا يمكن فتح الرابط')));
+      ShowToast(message: 'لا يمكن فتح الرابط', state: toastState.error);
     }
   }
 
@@ -98,18 +96,14 @@ class DetailsActivitiesBody extends StatelessWidget {
                   BlocConsumer<AttendanceCubit, AttendanceState>(
                     listener: (context, state) {
                       if (state is AttendanceSuccess) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('تم تسجيل حضورك بنجاح ✅'),
-                            backgroundColor: AppColors.success,
-                          ),
+                        ShowToast(
+                          message: 'تم تسجيل حضورك بنجاح ✅',
+                          state: toastState.success,
                         );
                       } else if (state is AttendanceError) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(state.message),
-                            backgroundColor: AppColors.statusCancelled,
-                          ),
+                        ShowToast(
+                          message: state.message,
+                          state: toastState.error,
                         );
                       }
                     },
