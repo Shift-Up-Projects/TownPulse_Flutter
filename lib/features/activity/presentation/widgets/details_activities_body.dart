@@ -9,6 +9,7 @@ import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/attedence/presentation/cubit/attedence_cubit.dart';
+import 'package:town_pulse2/features/review/presentation/widget/review_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsActivitiesBody extends StatelessWidget {
@@ -26,10 +27,20 @@ class DetailsActivitiesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(
+      context,
+    ).size.height; // ✅ جلب ارتفاع الشاشة
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      // ✅ FIX: وضع قيود ارتفاع على محتوى الحوار
+      child: Container(
+        constraints: BoxConstraints(
+          maxHeight: screenHeight * 0.85,
+        ), // تحديد أقصى ارتفاع بـ 85% من الشاشة
+        padding: const EdgeInsets.all(
+          16.0,
+        ), // إزالة Padding من هنا وإضافته داخل Container
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -131,6 +142,19 @@ class DetailsActivitiesBody extends StatelessWidget {
                   ),
                 ],
               ),
+
+              const SizedBox(height: 24),
+              Text(
+                'التقييمات والمراجعات',
+                style: Styles.textStyle20.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
+
+              ReviewSubmissionForm(activityId: activity.id!),
+              const SizedBox(height: 16),
+              ReviewListSection(activityId: activity.id!),
+
+              const SizedBox(height: 16),
             ],
           ),
         ),
