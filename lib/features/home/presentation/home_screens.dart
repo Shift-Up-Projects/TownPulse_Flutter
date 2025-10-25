@@ -10,6 +10,5 @@ final List<Widget> screens = [
   const MyActivitiesView(),
 
   CreateActivityView(),
-  const Center(child: Text('المفضلة')),
   ProfileView(),
 ];

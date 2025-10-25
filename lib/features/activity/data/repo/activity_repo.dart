@@ -19,6 +19,7 @@ abstract class ActivityRepo {
   Future<List<Activity>> getNearbyActivities({
     required double latitude,
     required double longitude,
+    required int maxDistance,
   });
   Future<List<Activity>> searchActivities(String query);
 }

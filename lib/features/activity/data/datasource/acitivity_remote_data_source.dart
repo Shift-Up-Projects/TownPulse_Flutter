@@ -71,10 +71,12 @@ class AcitivityRemoteDataSource {
   Future<List<Activity>> getNearByActivities({
     required double latitude,
     required double longitude,
+    required int maxDistance,
   }) async {
     try {
       final response = await Api.instance.get(
-        url: 'activity/near?latitude=$latitude&longitude=$longitude',
+        url:
+            'activity/near?latitude=$latitude&longitude=$longitude&maxDistance=$maxDistance',
       );
       if (response.statusCode == 200 && response.data['isSuccess'] == true) {
         final List<dynamic> data = response.data['data'];

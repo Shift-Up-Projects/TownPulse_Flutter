@@ -80,13 +80,14 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
-  void fetchNearbyActivities(double lat, double lon) async {
+  void fetchNearbyActivities(double lat, double lon, int maxDistance) async {
     emit(ActivityLoading());
 
     try {
       final activities = await activityRepo.getNearbyActivities(
         latitude: lat,
         longitude: lon,
+        maxDistance: maxDistance,
       );
       emit(ActivityLoaded(activities));
     } catch (e) {
@@ -110,16 +111,17 @@ class ActivityCubit extends Cubit<ActivityState> {
   }
 }
 
-void getNearbyActivities(BuildContext context) async {
-  try {
-    final pos = await determinePosition();
-    if (pos != null) {
-      context.read<ActivityCubit>().fetchNearbyActivities(
-        pos.latitude,
-        pos.longitude,
-      );
-    }
-  } catch (e) {
-    ShowToast(message: e.toString(), state: toastState.error);
-  }
-}
+// void getNearbyActivities(BuildContext context) async {
+//   try {
+//     final pos = await determinePosition();
+//     if (pos != null) {
+//       context.read<ActivityCubit>().fetchNearbyActivities(
+//         pos.latitude,
+//         pos.longitude,
+
+//       );
+//     }
+//   } catch (e) {
+//     ShowToast(message: e.toString(), state: toastState.error);
+//   }
+// }
