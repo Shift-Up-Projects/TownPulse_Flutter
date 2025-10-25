@@ -12,3 +12,12 @@ class AttendanceError extends AttendanceState {
   final String message;
   AttendanceError(this.message);
 }
+
+class MyAttendanceLoading extends AttendanceState {}
+
+class MyAttendanceLoaded extends AttendanceState {
+  final List<AttendanceRecord> records;
+  MyAttendanceLoaded(this.records);
+}
+
+class AttendanceDeleted extends AttendanceState {}

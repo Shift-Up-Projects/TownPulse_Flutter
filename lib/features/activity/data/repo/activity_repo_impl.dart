@@ -100,4 +100,24 @@ class ActivityRepoImpl implements ActivityRepo {
       longitude: longitude,
     );
   }
+
+  @override
+  Future<List<Activity>> searchActivities(String query) async {
+    try {
+      final response = await remoteDataSource.searchActivities(query);
+      final rawData = response.data['data'];
+
+      if (rawData == null || rawData is! List) return [];
+
+      final activities = rawData.map((e) => Activity.fromJson(e)).toList();
+      return activities;
+    } on DioException catch (e) {
+      final message =
+          e.message ??
+          'فشل الاتصال بالخادم. الرجاء التحقق من الإنترنت وحالة الخادم.';
+      throw Exception('فشل في البحث عن الأنشطة: $message');
+    } catch (e) {
+      throw Exception('خطأ غير متوقع أثناء البحث: $e');
+    }
+  }
 }

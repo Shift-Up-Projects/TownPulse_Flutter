@@ -3,11 +3,11 @@ import 'package:dio/dio.dart';
 
 class Api {
   final Dio _dio;
-  String? _token; // توكن المستخدم محفوظ بالذاكرة
-
+  String? _token;
   Api._(this._dio);
 
   static Api? _instance;
+  String? get token => _token;
 
   static void init() {
     if (_instance == null) {

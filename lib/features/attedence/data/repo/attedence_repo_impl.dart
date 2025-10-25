@@ -1,4 +1,5 @@
 import 'package:town_pulse2/features/attedence/data/datasource/attendance_remote_data_source.dart';
+import 'package:town_pulse2/features/attedence/data/model/attendance_record_model.dart';
 import 'package:town_pulse2/features/attedence/data/repo/attedance_repo.dart';
 
 class AttendanceRepoImpl implements AttendanceRepo {
@@ -17,5 +18,27 @@ class AttendanceRepoImpl implements AttendanceRepo {
       activityId: activityId,
       status: status,
     );
+  }
+
+  @override
+  Future<List<AttendanceRecord>> getMyAttendance(String token) async {
+    final response = await remoteDataSource.getMyAttendance(token);
+
+    final rawData = response.data['data'];
+
+    if (rawData == null) return [];
+
+    final attendanceList = rawData['attendance'];
+
+    if (attendanceList == null || attendanceList is! List) return [];
+
+    return (attendanceList as List)
+        .map((json) => AttendanceRecord.fromJson(json))
+        .toList();
+  }
+
+  @override
+  Future<void> deleteAttendance(String attendanceId, String token) async {
+    await remoteDataSource.deleteAttendance(attendanceId, token);
   }
 }

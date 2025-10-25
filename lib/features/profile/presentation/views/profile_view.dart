@@ -111,6 +111,14 @@ class ProfileView extends StatelessWidget {
                 ),
                 _buildActionCard(
                   context,
+                  title: 'سجل حضوري',
+                  icon: Icons.event_available,
+                  onTap: () {
+                    context.push(AppRouter.myAttendanceView);
+                  },
+                ),
+                _buildActionCard(
+                  context,
                   title: 'تغيير كلمة المرور',
                   icon: Icons.lock_reset,
                   onTap: () => context.push(AppRouter.updatePasswordView),

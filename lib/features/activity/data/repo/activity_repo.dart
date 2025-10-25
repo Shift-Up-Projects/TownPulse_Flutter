@@ -20,4 +20,5 @@ abstract class ActivityRepo {
     required double latitude,
     required double longitude,
   });
+  Future<List<Activity>> searchActivities(String query);
 }
