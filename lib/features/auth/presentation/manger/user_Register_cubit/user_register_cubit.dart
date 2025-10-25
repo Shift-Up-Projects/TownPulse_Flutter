@@ -11,16 +11,24 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
 
   static UserRegisterCubit get(context) => BlocProvider.of(context);
 
-  Future<void> userRegister(
-      {required String userName,required String email, required String password}) async {
+  Future<void> userRegister({
+    required String userName,
+    required String email,
+    required String password,
+  }) async {
     emit(UserRegisterLoadingState());
     final result = await authRepo.userSignUp(
       userName: userName,
-        email: email, password: password);
-    result.fold(ifLeft: (failure) {
-      emit(UserRegisterFailureState(errorMessage: failure.errorMessage));
-    }, ifRight: (message) {
-      emit(UserRegisterSuccessfullyState(message: message));
-    });
+      email: email,
+      password: password,
+    );
+    result.fold(
+      ifLeft: (failure) {
+        emit(UserRegisterFailureState(errorMessage: failure.errorMessage));
+      },
+      ifRight: (message) {
+        emit(UserRegisterSuccessfullyState(message: message));
+      },
+    );
   }
 }

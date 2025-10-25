@@ -17,8 +17,6 @@ class Api {
           receiveDataWhenStatusError: true,
           followRedirects: false,
 
-          validateStatus: (status ) => status != null,
-
           validateStatus: (status) => status != null,
 
           headers: {
@@ -27,9 +25,6 @@ class Api {
           },
         ),
       );
-
-
-
 
       _instance = Api._(dio);
       log("✅ Api Provider has been initialized successfully.");
@@ -79,8 +74,6 @@ class Api {
     String? token,
 
     int retryCount = 1,
-
-
   }) async {
     try {
       log('➡️ POST Request to: $url');
@@ -135,15 +128,11 @@ class Api {
     }
   }
 
-
-  Future<Response> get({required String url, String? token}) async {
-
   Future<Response> put({
     required String url,
     required dynamic body,
     String? token,
   }) async {
-
     try {
       log('➡️ PUT Request to: $url');
       log('   Body: $body');
@@ -174,5 +163,4 @@ class Api {
       rethrow;
     }
   }
-
 }
