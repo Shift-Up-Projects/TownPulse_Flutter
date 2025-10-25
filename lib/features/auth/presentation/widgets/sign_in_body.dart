@@ -1,4 +1,3 @@
-// lib/features/auth/presentation/widgets/sign_in_body.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -98,7 +97,6 @@ class _SignInBodyState extends State<SignInBody> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          // ✅ تصحيح المسار
                           context.go(AppRouter.forgetPasswordScreen);
                         },
                         child: Text('نسيت كلمة المرور؟'),
@@ -134,7 +132,6 @@ class _SignInBodyState extends State<SignInBody> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // ✅ تصحيح المسار
                           context.go(AppRouter.signUpScreen);
                         },
                         child: Text('إنشاء حساب'),

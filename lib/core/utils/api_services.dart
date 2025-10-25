@@ -16,13 +16,20 @@ class Api {
           baseUrl: 'https://townpulse-backend-fehi.onrender.com/api/v1.0.0/',
           receiveDataWhenStatusError: true,
           followRedirects: false,
+
+          validateStatus: (status ) => status != null,
+
           validateStatus: (status) => status != null,
+
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
         ),
       );
+
+
+
 
       _instance = Api._(dio);
       log("✅ Api Provider has been initialized successfully.");
@@ -70,6 +77,10 @@ class Api {
     required String url,
     required dynamic body,
     String? token,
+
+    int retryCount = 1,
+
+
   }) async {
     try {
       log('➡️ POST Request to: $url');
@@ -124,11 +135,15 @@ class Api {
     }
   }
 
+
+  Future<Response> get({required String url, String? token}) async {
+
   Future<Response> put({
     required String url,
     required dynamic body,
     String? token,
   }) async {
+
     try {
       log('➡️ PUT Request to: $url');
       log('   Body: $body');
@@ -159,4 +174,5 @@ class Api {
       rethrow;
     }
   }
+
 }
