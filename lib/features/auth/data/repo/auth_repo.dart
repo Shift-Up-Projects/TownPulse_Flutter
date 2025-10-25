@@ -24,4 +24,5 @@ abstract class AuthRepo {
     required String newPassword,
   });
   Future<Either<Failure, String>> userLogout(String token);
+  Future<Either<Failure, String>> forgotPassword({required String email});
 }
