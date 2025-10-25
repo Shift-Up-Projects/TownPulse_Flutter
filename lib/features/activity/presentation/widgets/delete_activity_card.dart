@@ -6,6 +6,7 @@ import 'package:town_pulse2/core/utils/app_colors.dart'; // ✅ يجب استي�
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/card_of_activities.dart';
+import 'package:town_pulse2/features/attedence/presentation/widgets/activity_attendees_dialog.dart';
 import 'package:town_pulse2/features/main_screen/presentation/view/edit_activity_view.dart';
 
 class DeleteAndUpdateActivityCard extends StatelessWidget {
@@ -59,7 +60,6 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
       ),
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
-          // ✅ منطق التعديل
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
@@ -95,7 +95,19 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
         }
         return false;
       },
-      child: CardOfActivity(activity: activity),
+      child: CardOfActivity(
+        activity: activity,
+        trailingWidget: IconButton(
+          icon: const Icon(Icons.people_alt, color: AppColors.secondary),
+          tooltip: 'عرض الحضور',
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) => ActivityAttendeesDialog(activity: activity),
+            );
+          },
+        ),
+      ),
     );
   }
 }

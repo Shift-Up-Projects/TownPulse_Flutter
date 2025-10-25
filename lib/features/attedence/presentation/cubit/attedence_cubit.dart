@@ -50,4 +50,50 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       emit(AttendanceError(e.toString()));
     }
   }
+
+  Future<void> fetchActivityAttendees(String activityId) async {
+    if (token == null) {
+      emit(AttendanceError('User not authenticated'));
+      return;
+    }
+    emit(ActivityAttendeesLoading());
+    try {
+      final rawData = await repo.getAttendanceByActivity(activityId, token!);
+
+      final attendanceList = rawData['attendance'] as List<dynamic>? ?? [];
+      final statistics = rawData['statistics'] as Map<String, dynamic>? ?? {};
+
+      final attendees = attendanceList
+          .map((json) => AttendanceRecord.fromJson(json))
+          .toList();
+
+      emit(ActivityAttendeesLoaded(attendees, statistics));
+    } catch (e) {
+      emit(AttendanceError(e.toString()));
+    }
+  }
+
+  Future<void> updateAttendanceStatus({
+    required String attendanceId,
+    required String newStatus,
+    required String activityId,
+  }) async {
+    if (token == null) {
+      emit(AttendanceError('User not authenticated'));
+      return;
+    }
+    emit(AttendanceUpdating());
+    try {
+      await repo.updateAttendanceStatus(attendanceId, newStatus, token!);
+
+      emit(
+        AttendanceUpdatedSuccessfully('تم تحديث حالة الحضور إلى $newStatus'),
+      );
+
+      await fetchActivityAttendees(activityId);
+    } catch (e) {
+      emit(AttendanceError(e.toString()));
+      await fetchActivityAttendees(activityId);
+    }
+  }
 }

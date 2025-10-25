@@ -6,8 +6,13 @@ import 'package:town_pulse2/features/activity/presentation/views/details_dialog_
 
 class CardOfActivity extends StatelessWidget {
   final Activity activity;
+  final Widget? trailingWidget;
 
-  const CardOfActivity({super.key, required this.activity});
+  const CardOfActivity({
+    super.key,
+    required this.activity,
+    this.trailingWidget,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +72,11 @@ class CardOfActivity extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
+            if (trailingWidget != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: trailingWidget!,
+              ),
           ],
         ),
       ),

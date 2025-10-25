@@ -21,3 +21,18 @@ class MyAttendanceLoaded extends AttendanceState {
 }
 
 class AttendanceDeleted extends AttendanceState {}
+
+class ActivityAttendeesLoading extends AttendanceState {}
+
+class ActivityAttendeesLoaded extends AttendanceState {
+  final List<AttendanceRecord> attendees;
+  final Map<String, dynamic> statistics;
+  ActivityAttendeesLoaded(this.attendees, this.statistics);
+}
+
+class AttendanceUpdating extends AttendanceState {}
+
+class AttendanceUpdatedSuccessfully extends AttendanceState {
+  final String message;
+  AttendanceUpdatedSuccessfully(this.message);
+}

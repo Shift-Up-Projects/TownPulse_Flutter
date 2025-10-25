@@ -53,4 +53,35 @@ class AttendanceRemoteDataSource {
       throw Exception('Unexpected error: $e');
     }
   }
+
+  Future<Response> getAttendanceByActivity(
+    String activityId,
+    String token,
+  ) async {
+    final url = 'attendance/activity/$activityId/attendance';
+    return await Api.instance.get(url: url, token: token);
+  }
+
+  Future<void> updateAttendanceStatus(
+    String attendanceId,
+    String newStatus,
+    String token,
+  ) async {
+    try {
+      final url = 'attendance/$attendanceId'; // PATCH /attendance/:id
+      final body = {'status': newStatus};
+
+      // نستخدم Api.instance.put الذي يعمل كـ PATCH/PUT
+      await Api.instance.put(url: url, body: body, token: token);
+      log(
+        '✅ Attendance status updated successfully for: $attendanceId to $newStatus',
+      );
+    } on DioException catch (e) {
+      log('❌ Dio error in updateAttendanceStatus: ${e.message}');
+      throw Exception('Network error: ${e.message}');
+    } catch (e) {
+      log('❌ Unexpected error in updateAttendanceStatus: $e');
+      throw Exception('Unexpected error: $e');
+    }
+  }
 }
