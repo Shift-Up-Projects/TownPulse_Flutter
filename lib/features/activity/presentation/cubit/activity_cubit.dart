@@ -93,6 +93,21 @@ class ActivityCubit extends Cubit<ActivityState> {
       emit(ActivityError('فشل في جلب الانشطة القريبة '));
     }
   }
+
+  Future<void> searchActivities(String query) async {
+    if (query.trim().isEmpty) {
+      await getAllActivity(category: currentCategory);
+      return;
+    }
+
+    emit(ActivityLoading());
+    try {
+      final activities = await activityRepo.searchActivities(query);
+      emit(ActivityLoaded(activities));
+    } catch (e) {
+      emit(ActivityError('فشل في جلب نتائج البحث: ${e.toString()}'));
+    }
+  }
 }
 
 void getNearbyActivities(BuildContext context) async {

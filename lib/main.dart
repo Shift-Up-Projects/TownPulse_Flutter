@@ -34,7 +34,6 @@ class TownPulse extends StatelessWidget {
     return BlocProvider(
       create: (context) => ActivityCubit(
         ActivityRepoImpl(AcitivityRemoteDataSource()),
-        // TODO: Replace 'yourSecondArgument' with the actual required argument
         CacheHelper.getData(key: 'token'),
       )..getAllActivity(category: null),
       child: MaterialApp.router(

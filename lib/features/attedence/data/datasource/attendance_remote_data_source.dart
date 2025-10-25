@@ -33,4 +33,24 @@ class AttendanceRemoteDataSource {
       throw Exception('Unexpected error: $e');
     }
   }
+
+  Future<Response> getMyAttendance(String token) async {
+    return await Api.instance.get(
+      url: 'attendance/my/attendance',
+      token: token,
+    );
+  }
+
+  Future<void> deleteAttendance(String attendanceId, String token) async {
+    try {
+      await Api.instance.delete(url: 'attendance/$attendanceId', token: token);
+      log('✅ Attendance record deleted successfully: $attendanceId');
+    } on DioException catch (e) {
+      log('❌ Dio error in deleteAttendance: ${e.message}');
+      throw Exception('Network error: ${e.message}');
+    } catch (e) {
+      log('❌ Unexpected error in deleteAttendance: $e');
+      throw Exception('Unexpected error: $e');
+    }
+  }
 }

@@ -1,5 +1,8 @@
+// lib/features/activity/presentation/widgets/delete_activity_card.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:town_pulse2/core/utils/app_colors.dart'; // ✅ يجب استيراد AppColors
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/card_of_activities.dart';
@@ -14,20 +17,49 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(activity.id),
+      // ✅ الخلفية الأساسية: للتعديل (سحب لليمين)
       background: Container(
-        color: Colors.green,
+        color: AppColors.success, // لون النجاح (أخضر)
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: const Icon(Icons.edit, color: Colors.white),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(Icons.edit, color: Colors.white),
+            SizedBox(width: 10),
+            Text(
+              'تعديل النشاط',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
+      // ✅ الخلفية الثانوية: للحذف (سحب لليسار)
       secondaryBackground: Container(
-        color: Colors.red,
+        color: AppColors.error, // لون الخطأ (أحمر)
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: const Icon(Icons.delete, color: Colors.white),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Icon(Icons.delete, color: Colors.white),
+            SizedBox(width: 10),
+            Text(
+              'حذف النشاط',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
+          // ✅ منطق التعديل
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
@@ -37,6 +69,7 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
           if (result == true) context.read<ActivityCubit>().getMyActiviy();
           return false;
         } else if (direction == DismissDirection.endToStart) {
+          // 🗑 منطق الحذف
           final confirm = await showDialog(
             context: context,
             builder: (_) => AlertDialog(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:town_pulse2/core/router/app_router.dart';
 
 const List<String> _titles = [
   'الرئيسية',
@@ -8,11 +10,16 @@ const List<String> _titles = [
   'الملف الشخصي',
 ];
 
-AppBar buildAppBar(int currentIndex) {
+AppBar buildAppBar(int currentIndex, BuildContext context) {
   return AppBar(
     title: Text(_titles[currentIndex]),
     actions: [
-      IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+      IconButton(
+        onPressed: () {
+          context.push(AppRouter.searchView);
+        },
+        icon: const Icon(Icons.search),
+      ),
       IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
     ],
   );

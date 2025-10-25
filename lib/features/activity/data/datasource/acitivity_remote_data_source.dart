@@ -87,4 +87,12 @@ class AcitivityRemoteDataSource {
       return [];
     }
   }
+
+  Future<Response> searchActivities(String query) async {
+    return await Api.instance.get(
+      url: 'activity',
+      query: {'?q': query},
+      token: _api.token,
+    );
+  }
 }
