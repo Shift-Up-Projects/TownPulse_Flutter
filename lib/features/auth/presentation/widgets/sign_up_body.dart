@@ -106,6 +106,12 @@ class _SignUpBodyState extends State<SignUpBody> {
                         }
                       },
                     ),
+                  TextButton(
+                    onPressed: () {
+                      context.go(AppRouter.signInScreen);
+                    },
+                    child: Text('العودة لشاشة تسجيل الدخول '),
+                  ),
                 ],
               ),
             ),
