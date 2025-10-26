@@ -9,7 +9,6 @@ abstract class Failure {
 class ServerFailure extends Failure {
   ServerFailure(super.errorMessage);
 
-  // لمعالجة أخطاء Dio العامة
   factory ServerFailure.fromDioException(DioException dioException) {
     if (dioException.response == null) {
       final message = dioException.message;
@@ -49,15 +48,12 @@ class ServerFailure extends Failure {
     }
   }
 
-  // لمعالجة الاستجابات من السيرفر
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 402) {
       if (response != null && response is Map<String, dynamic>) {
-        // أولاً حاول تجيب الرسالة من المسار العام "message"
         if (response['message'] != null) {
           return ServerFailure(response['message'].toString());
         }
-        // أو إذا السيرفر بيرجعها داخل "error.message"
         if (response['error'] != null &&
             response['error'] is Map &&
             response['error']['message'] != null) {

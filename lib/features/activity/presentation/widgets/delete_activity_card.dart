@@ -1,11 +1,10 @@
-// lib/features/activity/presentation/widgets/delete_activity_card.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:town_pulse2/core/utils/app_colors.dart'; // ✅ يجب استيراد AppColors
+import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/widgets/card_of_activities.dart';
+import 'package:town_pulse2/features/attedence/presentation/widgets/activity_attendees_dialog.dart';
 import 'package:town_pulse2/features/main_screen/presentation/view/edit_activity_view.dart';
 
 class DeleteAndUpdateActivityCard extends StatelessWidget {
@@ -17,9 +16,9 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(activity.id),
-      // ✅ الخلفية الأساسية: للتعديل (سحب لليمين)
+
       background: Container(
-        color: AppColors.success, // لون النجاح (أخضر)
+        color: AppColors.success,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: const Row(
@@ -37,9 +36,8 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
           ],
         ),
       ),
-      // ✅ الخلفية الثانوية: للحذف (سحب لليسار)
       secondaryBackground: Container(
-        color: AppColors.error, // لون الخطأ (أحمر)
+        color: AppColors.error,
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: const Row(
@@ -59,7 +57,6 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
       ),
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.startToEnd) {
-          // ✅ منطق التعديل
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
@@ -69,7 +66,6 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
           if (result == true) context.read<ActivityCubit>().getMyActiviy();
           return false;
         } else if (direction == DismissDirection.endToStart) {
-          // 🗑 منطق الحذف
           final confirm = await showDialog(
             context: context,
             builder: (_) => AlertDialog(
@@ -95,7 +91,19 @@ class DeleteAndUpdateActivityCard extends StatelessWidget {
         }
         return false;
       },
-      child: CardOfActivity(activity: activity),
+      child: CardOfActivity(
+        activity: activity,
+        trailingWidget: IconButton(
+          icon: const Icon(Icons.people_alt, color: AppColors.secondary),
+          tooltip: 'عرض الحضور',
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) => ActivityAttendeesDialog(activity: activity),
+            );
+          },
+        ),
+      ),
     );
   }
 }

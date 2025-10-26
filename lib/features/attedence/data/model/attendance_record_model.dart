@@ -1,4 +1,3 @@
-// lib/features/attedence/data/model/attendance_record_model.dart
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/auth/data/model/user_model.dart';
 

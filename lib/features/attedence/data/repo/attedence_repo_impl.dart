@@ -32,7 +32,7 @@ class AttendanceRepoImpl implements AttendanceRepo {
 
     if (attendanceList == null || attendanceList is! List) return [];
 
-    return (attendanceList as List)
+    return (attendanceList)
         .map((json) => AttendanceRecord.fromJson(json))
         .toList();
   }
@@ -40,5 +40,36 @@ class AttendanceRepoImpl implements AttendanceRepo {
   @override
   Future<void> deleteAttendance(String attendanceId, String token) async {
     await remoteDataSource.deleteAttendance(attendanceId, token);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAttendanceByActivity(
+    String activityId,
+    String token,
+  ) async {
+    final response = await remoteDataSource.getAttendanceByActivity(
+      activityId,
+      token,
+    );
+    final rawData = response.data['data'];
+
+    if (rawData == null || rawData is! Map<String, dynamic>) {
+      throw Exception('Invalid data received for activity attendees');
+    }
+
+    return rawData;
+  }
+
+  @override
+  Future<void> updateAttendanceStatus(
+    String attendanceId,
+    String newStatus,
+    String token,
+  ) async {
+    await remoteDataSource.updateAttendanceStatus(
+      attendanceId,
+      newStatus,
+      token,
+    );
   }
 }

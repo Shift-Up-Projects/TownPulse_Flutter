@@ -41,7 +41,6 @@ class CardHorizontalListOfMainScreen extends StatelessWidget {
           ),
           1,
         ),
-        // color: iconColor,
         elevation: 2,
         margin: EdgeInsets.all(10),
         child: Padding(

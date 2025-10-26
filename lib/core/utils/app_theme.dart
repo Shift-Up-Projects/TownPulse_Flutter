@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppThemes {
-  // 🌞 Light Theme
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
@@ -69,7 +68,6 @@ class AppThemes {
     iconTheme: const IconThemeData(color: AppColors.textPrimary),
   );
 
-  // 🌙 Dark Theme
   static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,

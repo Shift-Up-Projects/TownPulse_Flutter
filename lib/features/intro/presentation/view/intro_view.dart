@@ -1,7 +1,5 @@
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
-import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/features/intro/presentation/intro_pages.dart';
 import 'package:town_pulse2/features/intro/presentation/widget/intro_view_body.dart';
 import 'package:town_pulse2/features/intro/presentation/widget/pointer_for_intro_screen.dart';

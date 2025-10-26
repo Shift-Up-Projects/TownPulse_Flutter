@@ -1,5 +1,3 @@
-// lib/features/main_screen/presentation/view/my_activity_view.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';

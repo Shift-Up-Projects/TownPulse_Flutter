@@ -2,25 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
 
-Future<void> getNearby(BuildContext context) async {
+Future<void> getNearby(BuildContext context, int maxDistance) async {
   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) return;
+  if (!serviceEnabled) {
+    ShowToast(message: 'خدمة الموقع غير مفعلة.', state: toastState.warning);
+    return;
+  }
 
   LocationPermission permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) return;
+    if (permission == LocationPermission.denied) {
+      ShowToast(message: 'تم رفض إذن الموقع.', state: toastState.error);
+      return;
+    }
   }
 
-  final pos = await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.high,
-  );
-
-  context.read<ActivityCubit>().fetchNearbyActivities(
-    pos.latitude,
-    pos.longitude,
-  );
+  try {
+    final pos = await determinePosition();
+    if (pos != null) {
+      context.read<ActivityCubit>().fetchNearbyActivities(
+        pos.latitude,
+        pos.longitude,
+        maxDistance,
+      );
+    }
+  } catch (e) {
+    ShowToast(message: e.toString(), state: toastState.error);
+  }
 }
 
 Future<Position?> determinePosition() async {

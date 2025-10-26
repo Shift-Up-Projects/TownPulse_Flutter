@@ -1,7 +1,5 @@
-// lib/features/profile/presentation/view/update_password_view.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/auth/data/repo/auth_repo_Impl.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart';

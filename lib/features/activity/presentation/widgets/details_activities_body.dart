@@ -9,6 +9,8 @@ import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/attedence/presentation/cubit/attedence_cubit.dart';
+import 'package:town_pulse2/features/review/presentation/widget/review_list_section.dart';
+import 'package:town_pulse2/features/review/presentation/widget/review_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsActivitiesBody extends StatelessWidget {
@@ -26,9 +28,13 @@ class DetailsActivitiesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
+
+      child: Container(
+        constraints: BoxConstraints(maxHeight: screenHeight * 0.85),
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
@@ -131,6 +137,19 @@ class DetailsActivitiesBody extends StatelessWidget {
                   ),
                 ],
               ),
+
+              const SizedBox(height: 24),
+              Text(
+                'التقييمات والمراجعات',
+                style: Styles.textStyle20.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
+
+              ReviewSubmissionForm(activityId: activity.id!),
+              const SizedBox(height: 16),
+              ReviewListSection(activityId: activity.id!),
+
+              const SizedBox(height: 16),
             ],
           ),
         ),

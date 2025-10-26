@@ -94,10 +94,12 @@ class ActivityRepoImpl implements ActivityRepo {
   Future<List<Activity>> getNearbyActivities({
     required double latitude,
     required double longitude,
+    required int maxDistance,
   }) async {
     return await remoteDataSource.getNearByActivities(
       latitude: latitude,
       longitude: longitude,
+      maxDistance: maxDistance,
     );
   }
 

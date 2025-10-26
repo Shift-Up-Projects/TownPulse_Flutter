@@ -205,4 +205,34 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> forgotPassword({
+    required String email,
+  }) async {
+    try {
+      final body = {'email': email.trim()};
+
+      final response = await Api.instance.post(
+        url: 'users/forgotPassword',
+        body: body,
+        token: null,
+      );
+
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return Right(
+          response.data['message'] ??
+              'تم إرسال رابط إعادة التعيين إلى بريدك الإلكتروني بنجاح.',
+        );
+      } else {
+        return Left(
+          ServerFailure.fromResponse(response.statusCode ?? 500, response.data),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioException(e));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

@@ -10,6 +10,54 @@ import 'package:town_pulse2/features/activity/presentation/widgets/horizontal_li
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
+  void _showDistanceDialog(BuildContext context) {
+    final TextEditingController distanceController = TextEditingController(
+      text: '10',
+    );
+    final formKey = GlobalKey<FormState>();
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('تحديد نصف القطر'),
+        content: Form(
+          key: formKey,
+          child: TextFormField(
+            controller: distanceController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              labelText: 'المسافة بالكيلومتر (كم)',
+              suffixText: 'كم',
+            ),
+            validator: (value) {
+              if (value == null ||
+                  int.tryParse(value) == null ||
+                  int.parse(value) <= 0) {
+                return 'أدخل مسافة صحيحة (أكبر من صفر)';
+              }
+              return null;
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('إلغاء'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                final distance = int.parse(distanceController.text);
+                Navigator.pop(ctx);
+                getNearby(context, distance);
+              }
+            },
+            child: const Text('بحث'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +95,7 @@ class MainScreen extends StatelessWidget {
                 const Spacer(),
                 TextButton(
                   onPressed: () async {
-                    await getNearby(context);
+                    _showDistanceDialog(context);
                   },
                   child: Text(
                     ' الانشطة القريبة',
