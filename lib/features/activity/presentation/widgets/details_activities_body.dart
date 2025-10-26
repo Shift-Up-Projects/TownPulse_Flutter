@@ -9,6 +9,7 @@ import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/model/activity_model.dart';
 import 'package:town_pulse2/features/attedence/presentation/cubit/attedence_cubit.dart';
+import 'package:town_pulse2/features/review/presentation/widget/review_list_section.dart';
 import 'package:town_pulse2/features/review/presentation/widget/review_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,20 +28,14 @@ class DetailsActivitiesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(
-      context,
-    ).size.height; // ✅ جلب ارتفاع الشاشة
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      // ✅ FIX: وضع قيود ارتفاع على محتوى الحوار
+
       child: Container(
-        constraints: BoxConstraints(
-          maxHeight: screenHeight * 0.85,
-        ), // تحديد أقصى ارتفاع بـ 85% من الشاشة
-        padding: const EdgeInsets.all(
-          16.0,
-        ), // إزالة Padding من هنا وإضافته داخل Container
+        constraints: BoxConstraints(maxHeight: screenHeight * 0.85),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

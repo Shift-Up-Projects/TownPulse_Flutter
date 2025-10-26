@@ -36,12 +36,6 @@ class ActivityTextFields extends StatelessWidget {
         ),
         SizedBox(height: 12),
 
-        // CustomTextField(
-        //   text: 'رابط الخريطة (اختياري)',
-        //   prefixIcon: Icons.map,
-        //   controller: mapUrlController,
-        // ),
-        // SizedBox(height: 12),
         Row(
           children: [
             Expanded(

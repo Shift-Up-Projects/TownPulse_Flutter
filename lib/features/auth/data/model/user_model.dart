@@ -1,5 +1,3 @@
-// lib/features/auth/data/model/user_model.dart
-
 class User {
   final String id;
   final String name;

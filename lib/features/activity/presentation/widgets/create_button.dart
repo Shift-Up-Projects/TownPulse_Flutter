@@ -1,4 +1,3 @@
-// lib/features/activity/presentation/views/create_activity/widgets/create_button.dart
 import 'package:flutter/material.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 

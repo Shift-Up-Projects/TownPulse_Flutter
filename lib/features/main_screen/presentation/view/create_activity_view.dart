@@ -1,7 +1,5 @@
-// lib/features/activity/presentation/views/create_activity/create_activity_view.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_cubit.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
@@ -22,7 +20,6 @@ class CreateActivityView extends StatefulWidget {
 class _CreateActivityViewState extends State<CreateActivityView> {
   final _formKey = GlobalKey<FormState>();
 
-  // controllers
   final titleController = TextEditingController();
   final descController = TextEditingController();
   final locController = TextEditingController();

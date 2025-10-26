@@ -1,14 +1,12 @@
-// lib/features/auth/presentation/view/forget_password_view.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:town_pulse2/core/router/app_router.dart';
 import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
-import 'package:town_pulse2/core/widgets/custom_loading_indactor.dart'; // ✅ استيراد
-import 'package:town_pulse2/core/widgets/showToast.dart'; // ✅ استيراد
-import 'package:town_pulse2/features/auth/data/repo/auth_repo_Impl.dart'; // ✅ استيراد
+import 'package:town_pulse2/core/widgets/custom_loading_indactor.dart';
+import 'package:town_pulse2/core/widgets/showToast.dart';
+import 'package:town_pulse2/features/auth/data/repo/auth_repo_Impl.dart';
 import 'package:town_pulse2/features/auth/presentation/manger/forget_password_cubit/forgot_password_cubit.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_button.dart';
 import 'package:town_pulse2/features/auth/presentation/widgets/custom_text_field.dart'
@@ -23,12 +21,10 @@ class ForgetPasswordView extends StatefulWidget {
 
 class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   TextEditingController emailController = TextEditingController();
-  final _formKey = GlobalKey<FormState>(); // ✅ إضافة Form Key
+  final _formKey = GlobalKey<FormState>();
 
   void _submit() {
-    // 🔑 FIX: التحقق من صحة النموذج قبل الإرسال
     if (_formKey.currentState?.validate() == true) {
-      // ✅ استدعاء دالة forgotPassword
       ForgotPasswordCubit.get(
         context,
       ).forgotPassword(email: emailController.text.trim());

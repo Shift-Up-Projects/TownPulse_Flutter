@@ -13,7 +13,7 @@ class MainScreen extends StatelessWidget {
   void _showDistanceDialog(BuildContext context) {
     final TextEditingController distanceController = TextEditingController(
       text: '10',
-    ); // القيمة الافتراضية 10 كم
+    );
     final formKey = GlobalKey<FormState>();
 
     showDialog(
@@ -49,7 +49,6 @@ class MainScreen extends StatelessWidget {
               if (formKey.currentState!.validate()) {
                 final distance = int.parse(distanceController.text);
                 Navigator.pop(ctx);
-                // استدعاء دالة جلب الأنشطة القريبة بالمسافة المحددة
                 getNearby(context, distance);
               }
             },

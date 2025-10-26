@@ -33,7 +33,6 @@ class Api {
 
   static Api get instance => _instance!;
 
-  // دالة لحفظ التوكن بعد تسجيل الدخول
   void setToken(String token) {
     _token = token;
     log("🟢 Token set in Api Singleton: $_token");

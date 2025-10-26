@@ -1,4 +1,3 @@
-// lib/features/review/data/repo/review_repo.dart
 import 'package:town_pulse2/features/review/data/model/review_model.dart';
 
 abstract class ReviewRepo {

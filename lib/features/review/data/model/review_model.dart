@@ -1,4 +1,3 @@
-// lib/features/review/data/model/review_model.dart
 import 'package:town_pulse2/features/auth/data/model/user_model.dart';
 
 class Review {

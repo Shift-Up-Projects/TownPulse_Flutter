@@ -18,15 +18,11 @@ class CustomButton extends StatelessWidget {
         child: Ink(
           height: 60,
           decoration: BoxDecoration(
-            // border: Border.all(color: Colors.deepPurple),
             borderRadius: BorderRadius.circular(15),
             color: AppColors.primaryDark,
           ),
 
-          child: Container(
-            // color: Colors.white,
-            child: Center(child: Text(text)),
-          ),
+          child: Container(child: Center(child: Text(text))),
         ),
       ),
     );

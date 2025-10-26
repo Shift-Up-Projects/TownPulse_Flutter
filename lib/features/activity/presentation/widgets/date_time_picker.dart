@@ -1,4 +1,3 @@
-// lib/features/activity/presentation/views/create_activity/widgets/date_time_picker.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,4 +1,3 @@
-// lib/features/auth/presentation/manger/forgot_password_cubit/forgot_password_state.dart
 part of 'forgot_password_cubit.dart';
 
 abstract class ForgotPasswordState {}

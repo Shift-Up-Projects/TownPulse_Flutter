@@ -1,4 +1,3 @@
-// lib/features/profile/presentation/view/profile_view.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -21,10 +20,7 @@ class ProfileView extends StatelessWidget {
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileLogoutSuccess) {
-            // 🔑 FIX: استخدام Future.delayed(Duration.zero) لضمان اكتمال
-            // عملية الـ emit قبل إغلاق الـ Cubit بواسطة التنقل.
             Future.delayed(Duration.zero, () {
-              // توجيه المستخدم لشاشة تسجيل الدخول بعد الخروج
               context.go(AppRouter.signInScreen);
             });
           }
@@ -173,7 +169,7 @@ class ProfileView extends StatelessWidget {
   }) {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
-      color: AppColors.bgTertiary, // استخدام لون أغمق للبطاقة
+      color: AppColors.bgTertiary,
       child: ListTile(
         leading: Icon(icon, color: color),
         title: Text(title, style: TextStyle(color: color)),

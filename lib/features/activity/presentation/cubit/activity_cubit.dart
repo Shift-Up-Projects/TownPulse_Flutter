@@ -1,10 +1,7 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:town_pulse2/core/widgets/showToast.dart';
 import 'package:town_pulse2/features/activity/data/repo/activity_repo.dart';
-import 'package:town_pulse2/features/activity/get_near_by_gio.dart';
 import 'package:town_pulse2/features/activity/presentation/cubit/activity_state.dart';
 
 class ActivityCubit extends Cubit<ActivityState> {
@@ -110,18 +107,3 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 }
-
-// void getNearbyActivities(BuildContext context) async {
-//   try {
-//     final pos = await determinePosition();
-//     if (pos != null) {
-//       context.read<ActivityCubit>().fetchNearbyActivities(
-//         pos.latitude,
-//         pos.longitude,
-
-//       );
-//     }
-//   } catch (e) {
-//     ShowToast(message: e.toString(), state: toastState.error);
-//   }
-// }

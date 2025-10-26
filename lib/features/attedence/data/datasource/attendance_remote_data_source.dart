@@ -68,10 +68,9 @@ class AttendanceRemoteDataSource {
     String token,
   ) async {
     try {
-      final url = 'attendance/$attendanceId'; // PATCH /attendance/:id
+      final url = 'attendance/$attendanceId';
       final body = {'status': newStatus};
 
-      // نستخدم Api.instance.put الذي يعمل كـ PATCH/PUT
       await Api.instance.put(url: url, body: body, token: token);
       log(
         '✅ Attendance status updated successfully for: $attendanceId to $newStatus',

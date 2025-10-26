@@ -5,9 +5,7 @@ import 'package:town_pulse2/core/utils/app_colors.dart';
 import 'package:town_pulse2/core/utils/styles.dart';
 import 'package:town_pulse2/core/widgets/shimmer_loading.dart';
 import 'package:town_pulse2/core/widgets/showToast.dart';
-import 'package:town_pulse2/features/activity/presentation/widgets/card_of_activities.dart';
 import 'package:town_pulse2/features/attedence/presentation/cubit/attedence_cubit.dart';
-import 'package:town_pulse2/features/attedence/data/model/attendance_record_model.dart';
 import 'package:town_pulse2/features/attedence/presentation/widgets/build_dismissible_attendance_card.dart';
 import 'package:town_pulse2/features/main_screen/presentation/widgets/swipe_hint_card.dart';
 
